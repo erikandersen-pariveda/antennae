@@ -1,0 +1,19 @@
+<project name="library1" default="build">
+
+    <!-- project-specific properties -->
+    <property name="project.name" value="library1"/>
+
+    <!--
+        Root directory needs to be a fixed location across all projects that use the common files.
+        This is case it is fixed at the root of the examples directory
+    -->
+    <property name="root.dir" location="../.."/>
+    <import file="build-imports.xml"/>
+
+    <!-- This library doesn't depend on anything else. -->
+    <path id="flex2.lib.path">
+    </path>
+
+    <!-- targets -->
+    <target name="build" depends="init,flex2-library" description="Build the library"/>
+</project>
