@@ -1,0 +1,11 @@
+<project name="Antennae" default="dist" basedir=".">
+    <target name="update-version">
+        <propertyfile file="version.properties">
+            <entry key="minor" type="int" default="0000" operation="+" pattern="0000" />
+        </propertyfile>
+    </target>
+    <target name="dist">
+        <property file="version.properties" />
+        <zip destfile="dist/${ant.project.name}-${major}.${minor}.zip" basedir="Antennae" />
+    </target>
+</project>

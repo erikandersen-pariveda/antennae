@@ -1,0 +1,24 @@
+<!-- Master build file for all projects -->
+<project default="root" basedir=".">
+    <property name="root.dir" location="." />
+    <import file="build-imports.xml" />
+
+    <target name="clean" description="Clean all projects">
+        <echoAndRun project="app2" target="clean" />
+        <echoAndRun project="multi" target="clean" />
+    </target>
+
+    <target name="build" description="Build all projects">
+        <echoAndRun project="app2" target="build" />
+        <echoAndRun project="multi" target="build" />
+    </target>
+
+    <target name="doc" description="Build documentation for all projects">
+        <echoAndRun project="app2" target="doc" />
+        <echoAndRun project="multi" target="doc" />
+    </target>
+
+    <target name="test" description="Test all projects" depends="build">
+        <echoAndRun project="multi" target="test" />
+    </target>
+</project>

@@ -1,0 +1,8 @@
+<!-- build-assets.xml: This file pulls in definitions of all build assets for
+     project directories below it. -->
+
+<project>
+    <import file="../lib/build-assets.xml"/>
+    <import file="app2/build-assets.xml"/>
+    <import file="multi/build-assets.xml"/>
+</project>

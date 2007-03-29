@@ -1,0 +1,54 @@
+<!--
+    Copyright (c) 2007 Allurent, Inc.
+    http://code.google.com/p/antennae/
+    
+    Permission is hereby granted, free of charge, to any person obtaining
+    a copy of this software and associated documentation files (the
+    "Software"), to deal in the Software without restriction, including
+    without limitation the rights to use, copy, modify, merge, publish,
+    distribute, sublicense, and/or sell copies of the Software, and to
+    permit persons to whom the Software is furnished to do so, subject to
+    the following conditions:
+    
+    The above copyright notice and this permission notice shall be
+    included in all copies or substantial portions of the Software.
+    
+    THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
+    EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
+    MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
+    NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE
+    LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION
+    OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION
+    WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
+-->
+<project>
+    <!-- derived project properties -->
+    <property name="project.swf" value="${project.name}.swf" />
+    <property name="project.swc" value="${project.name}.swc" />
+    <property name="project.flex2.application" value="${project.name}.mxml" />
+    <property name="project.jar" value="${project.name}.jar" />
+    <property name="project.war" value="${project.name}.war" />
+
+    <!-- system properties -->
+    <property name="flex2.dir" value="" />
+    <property name="flex2.frameworks.dir" value="${flex2.dir}/frameworks" />
+    <property name="flex2.config" value="${flex2.frameworks.dir}/flex-config.xml" />
+    <property name="flex2.dist.lib" value="${flex2.dir}/lib" />
+    <property name="flex2.compc.jar" value="${flex2.dist.lib}/compc.jar" />
+    <property name="flex2.mxmlc.jar" value="${flex2.dist.lib}/mxmlc.jar" />
+    <property name="flex2.mxmlc.options" value="" />
+    <property name="flex2.compc.options" value="" />
+
+    <property name="as3doc.template.dir" value="${flex2.dir}/asdoc/templates" />
+    <property name="as3doc.jar" value="${flex2.dir}/lib/asdoc.jar" />
+    <property name="as3doc.xalan.jar" value="${flex2.dir}/asdoc/lib/xalan.jar" />
+
+    <!-- arc-flexunit2 tests -->
+    <property name="arc-flexunit2.loglevel" value="info" />
+    <property name="arc-flexunit2.alltests.suite" value="FlexUnitAllTests.suite()" />
+    <property name="arc-flexunit2.reportserver.port" value="50031" />
+    <property name="arc-flexunit2.reportserver.host" value="localhost" />
+    <property name="arc-flexunit2.timeout" value="150000" />
+    <property name="arc-flexunit2.failure.indicator.file" value="build/.flexunit2-failed" />
+    <property name="reportserver.pass.indicator.file" value="build/.arc-flexunit.pass" />
+</project>

@@ -1,0 +1,25 @@
+<!--
+    Sample unit test suite project: tests the foo/Foo.as class
+    in the library1 project.
+-->
+<project name="appTest" default="build">
+    <!-- project-specific properties -->
+    <property name="project.name" value="MultiAppTest"/>
+    <!--
+        Root directory needs to be a fixed location across all projects that use the common files.
+        This is case it is fixed at the root of the examples directory
+    -->
+    <property name="root.dir" location="../.."/>
+    <import file="build-imports.xml"/>
+
+    <path id="flex2.lib.path">
+        <pathelement location="${multi.library1.swc}"/>
+        <pathelement location="${multi.library2.swc}"/>
+        <pathelement location="${flexunit2.swc}"/>
+        <pathelement location="${arc-flexunit2.swc}"/>
+    </path>
+
+    <!-- targets -->
+    <target name="build" depends="init,flex2-application" description="Build the test application"/>
+    <target name="test" depends="build,test-flexunit2" description="Run the test application"/>
+</project>

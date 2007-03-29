@@ -1,0 +1,5 @@
+<project>
+    <property name="flexunit2.swc" location="${root.dir}/../lib/flexunit2.swc"/>
+    <property name="arc-flexunit2.swc" location="${root.dir}/../lib/arc-flexunit2.swc"/>
+    <property name="arc-flexunit2.jar" location="${root.dir}/../lib/arc-flexunit2.jar"/>
+</project>
