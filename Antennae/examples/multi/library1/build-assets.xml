@@ -2,7 +2,7 @@
      relative to ${multi.dir} since we don't know what the current
      directory is in which Ant is running. -->
 
-<project>
+<project name="library1.assets">
     <!-- For convenience, set up the name of the project directory -->
     <property name="multi.library1.dir" location="${multi.dir}/library1"/>
 

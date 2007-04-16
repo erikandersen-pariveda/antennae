@@ -1,4 +1,4 @@
-<project>
+<project name="arc-flexunit2.assets">
     <property name="arc-flexunit2.dir" location="${root.dir}/arc-flexunit2" />
 
     <property name="arc-flexunit2.mxml"

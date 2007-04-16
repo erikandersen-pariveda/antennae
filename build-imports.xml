@@ -1,4 +1,4 @@
-<project>
+<project name="antennae.imports">
     <property file="${root.dir}/build-user.properties" />
     <import file="${root.dir}/tools/build-common-properties.xml" />
 
