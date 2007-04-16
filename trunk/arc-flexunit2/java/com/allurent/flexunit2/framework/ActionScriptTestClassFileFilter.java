@@ -35,8 +35,8 @@ import java.util.List;
 import java.util.regex.Pattern;
 
 /**
- * Utility class that filters directories and files to create
- * a list of classes that should be run by FlexUnit.
+ * Utility class that filters directories and files to create a list of classes that should be run
+ * by FlexUnit.
  */
 public class ActionScriptTestClassFileFilter implements FileFilter
 {
