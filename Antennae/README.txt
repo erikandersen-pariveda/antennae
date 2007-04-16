@@ -101,21 +101,9 @@ targets
 build.xml
 	Each project that requires or aggregates build information specifies a build.xml
 	file. Each build.xml file in Antennae follows the same basic structure:
-	root.dir property, project properties, imports, target overrides, custom targets.
+	project properties, imports, target overrides, custom targets.
 	It will probably be helpful to have both examples/build*.xml and
 	examples/app2/build*.xml as references when reading the rest of this section.
-	
-root.dir property
-	Antennae relies on a fixed root directory to base sub packages and references
-	on. This property must be set the same for all projects that will interact
-	with the rest of the standard Antennae files. The most common directory
-	to make the root directory is the root of your source control tree. In
-	the case of the sample files, the root.dir is set to the Antennae/ directory.
-	
-	When setting the root.dir in a build file, it is best to make it a relative
-	directory reference. This way if you make a copy of the tree somewhere else,
-	such as checking a branch out of a source control system all of the root.dir
-	references will still point to the same directory.
 	
 project properties
 	The shared build logic relies on an individual project to define pieces that
@@ -136,7 +124,7 @@ imports
 	will just reference its parent and not do anything itself. Most of
 	the sample build-imports.xml files included in Antennae follow this pattern.
 	
-	The primary exception is the build-imports.xml defined in the root.dir location.
+	The primary exception is the build-imports.xml defined at the top location.
 	This build-imports.xml is responsible for loading the centralized configuration,
 	pulling in all the shared building code, and kicking off walking down the directory
 	hierarchy through the use of build-assets.xml.

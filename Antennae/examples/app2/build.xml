@@ -4,12 +4,6 @@
     <!-- This overrides the default in build-common-properties.xml -->
     <property name="project.name" value="Main" />
 
-    <!--
-        Root directory needs to be a fixed location across all projects that use the common files.
-        This is case it is fixed at the root of the Antennae directory
-    -->
-    <property name="root.dir" location="../.." />
-
     <!-- In order to use the flex2-application target, a flex2.lib.path must be defined -->
     <path id="flex2.lib.path"/>
 

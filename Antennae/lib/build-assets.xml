@@ -1,8 +1,8 @@
 <project name="lib.assets">
-    <property name="lib.dir" location="${root.dir}/lib" />
+    <dirname property="lib.assets.dir" file="${ant.file.lib.assets}"/>
 
-    <property name="flexunit2.swc" location="${lib.dir}/flexunit2.swc"/>
-    <property name="arc-flexunit2.swc" location="${lib.dir}/arc-flexunit2.swc"/>
-    <property name="arc-flexunit2.jar" location="${lib.dir}/arc-flexunit2.jar"/>
-    <property name="arc-flexunit2.mxml" location="${lib.dir}/RunTests.mxml" />
+    <property name="flexunit2.swc" location="${lib.assets.dir}/flexunit2.swc"/>
+    <property name="arc-flexunit2.swc" location="${lib.assets.dir}/arc-flexunit2.swc"/>
+    <property name="arc-flexunit2.jar" location="${lib.assets.dir}/arc-flexunit2.jar"/>
+    <property name="arc-flexunit2.mxml" location="${lib.assets.dir}/RunTests.mxml" />
 </project>

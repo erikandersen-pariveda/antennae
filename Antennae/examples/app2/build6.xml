@@ -2,11 +2,7 @@
 <project name="app2" default="build">
     <!-- project specific properties -->
     <property name="project.name" value="Main" />
-    <!--
-        Root directory needs to be a fixed location across all projects that use the common files.
-        This is case it is fixed at the root of the examples directory
-    -->
-    <property name="root.dir" location=".." />
+
     <path id="flex2.lib.path"/>
 
     <!-- pull in shared information -->

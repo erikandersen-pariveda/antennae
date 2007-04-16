@@ -5,11 +5,6 @@
 <project name="appTest" default="build">
     <!-- project-specific properties -->
     <property name="project.name" value="MultiAppTest"/>
-    <!--
-        Root directory needs to be a fixed location across all projects that use the common files.
-        This is case it is fixed at the root of the Antennae directory.
-    -->
-    <property name="root.dir" location="../../.."/>
     <import file="build-imports.xml"/>
 
     <path id="flex2.lib.path">

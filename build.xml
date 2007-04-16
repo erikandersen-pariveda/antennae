@@ -1,5 +1,4 @@
 <project name="antennae" default="dist" basedir=".">
-    <property name="root.dir" location="." />
     <import file="build-imports.xml" />
 
     <property name="antennae.dir" location="Antennae"/>

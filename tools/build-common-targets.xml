@@ -136,7 +136,7 @@
             list of SWCs relative to the root directory, which can be used
             below as a matching "pattern" for an <uptodate> fileset. -->
         <pathconvert property="flex2.lib.files" refid="flex2.lib.path" pathsep=",">
-            <globmapper from="${root.dir}/*" to="*" handledirsep="true" />
+            <globmapper from="${uptodate.dir}/*" to="*" handledirsep="true" />
         </pathconvert>
 
         <!-- Default the SWC list to a pattern that matches nothing if none were speced -->
@@ -148,7 +148,7 @@
 
         <uptodate property="${project.swf}.compiled" targetfile="${build.mxmlc.dir}/${project.swf}">
             <srcfiles dir="${src.flex2.dir}" includes="**/*" />
-            <srcfiles dir="${root.dir}" includes="${mxmlc.lib.files}" />
+            <srcfiles dir="${uptodate.dir}" includes="${mxmlc.lib.files}" />
         </uptodate>
     </target>
 
@@ -168,7 +168,7 @@
     <target name="flex2-library-check">
         <!-- avoid error if no generated files exist -->
         <pathconvert property="flex2.lib.files" refid="flex2.lib.path" pathsep=",">
-            <globmapper from="${root.dir}/*" to="*" handledirsep="true" />
+            <globmapper from="${uptodate.dir}/*" to="*" handledirsep="true" />
         </pathconvert>
 
         <condition property="compc.lib.files" value="${flex2.lib.files}" else="__no_match__">
@@ -179,7 +179,7 @@
 
         <uptodate property="${project.swc}.compiled" targetfile="${build.compc.dir}/${project.swc}">
             <srcfiles dir="${src.flex2.dir}" includes="**/*" />
-            <srcfiles dir="${root.dir}" includes="${compc.lib.files}" />
+            <srcfiles dir="${uptodate.dir}" includes="${compc.lib.files}" />
         </uptodate>
     </target>
 

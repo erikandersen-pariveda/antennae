@@ -1,9 +1,11 @@
 <project name="antennae.imports">
-    <property file="${root.dir}/build-user.properties" />
-    <import file="${root.dir}/tools/build-common-properties.xml" />
+    <dirname property="antennae.imports.dir" file="${ant.file.antennae.imports}"/>
 
-    <import file="${root.dir}/tools/build-common-tasks.xml" />
-    <import file="${root.dir}/tools/build-common-targets.xml" />
+    <property file="${antennae.imports.dir}/build-user.properties" />
+    <import file="tools/build-common-properties.xml" />
 
-    <import file="${root.dir}/build-assets.xml" />
+    <import file="tools/build-common-tasks.xml" />
+    <import file="tools/build-common-targets.xml" />
+
+    <import file="build-assets.xml" />
 </project>
