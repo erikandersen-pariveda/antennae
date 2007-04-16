@@ -36,12 +36,14 @@ import java.io.OutputStream;
  */
 public class UnitTestReportHandler extends Thread
 {
-	private static final String POLICY_FILE_REQUEST = "<policy-file-request/>";
-	private static final String POLICY_FILE = "<cross-domain-policy><allow-access-from domain=\"*\" to-ports=\"*\"/></cross-domain-policy>"; 
+    private static final String POLICY_FILE_REQUEST = "<policy-file-request/>";
 
-	private InputStream inputStream;
+    private static final String POLICY_FILE = "<cross-domain-policy><allow-access-from domain=\"*\" to-ports=\"*\"/></cross-domain-policy>";
+
+    private InputStream inputStream;
+
     private OutputStream outputStream;
-    
+
     private String status;
 
     /**
@@ -49,12 +51,13 @@ public class UnitTestReportHandler extends Thread
      * 
      * @param inputStream
      *            Input stream to read from
-     *            @param outputStream Output stream to send data to
+     * @param outputStream
+     *            Output stream to send data to
      */
     public UnitTestReportHandler(InputStream inputStream, OutputStream outputStream)
     {
-    	this.inputStream = inputStream;
-    	this.outputStream = outputStream;
+        this.inputStream = inputStream;
+        this.outputStream = outputStream;
     }
 
     /**
@@ -91,11 +94,11 @@ public class UnitTestReportHandler extends Thread
                         }
                         if (message.equals(POLICY_FILE_REQUEST))
                         {
-                        	outputStream.write(POLICY_FILE.getBytes());
-                        	outputStream.write(0);
-                        	outputStream.flush();
-                        	status = UnitTestReportServer.POLICY;
-                        	return;
+                            outputStream.write(POLICY_FILE.getBytes());
+                            outputStream.write(0);
+                            outputStream.flush();
+                            status = UnitTestReportServer.POLICY;
+                            return;
                         }
                         handleMessage(message);
                         data = new StringBuffer();
