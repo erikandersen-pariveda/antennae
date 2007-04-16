@@ -7,11 +7,9 @@
     </path>
     <path id="javac.lib.path" />
 
-    <target name="build" depends="java-classes,flex2-library" />
+    <target name="build" depends="java-classes,flex2-library,build.internal" />
 
-    <target name="stage" depends="build,stage-nobuild" />
-
-    <target name="stage-nobuild">
+	<target name="build.internal">
         <jar destfile="${build.stage.dir}/${project.jar}" basedir="${build.javac.dir}" />
-    </target>
+	</target>
 </project>

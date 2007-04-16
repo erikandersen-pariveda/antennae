@@ -21,14 +21,12 @@
     OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION
     WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 -->
-<project>
+<project name="tools">
     <!--
         The following targets are common targets that every project should
-        support and the interdependencies between such targets. 
-        Whenever possible the default behavior is also defined and separated into
-        a name.default target. This allows reuse of the standard logic when creating
-        a master build file that calls into sub projects but also should execute the
-        default behavior.
+        support and the interdependencies between such targets. If another
+        project overrides this method it can reference it by calling
+        tools.target.
     -->
 
     <!--
@@ -38,22 +36,12 @@
         ++ Create all directories and other resources required by miscellaneous targets.
         ++ =======================================================================
     -->
-    <target name="init" depends="init.default" description="Set up the project"/>
-
-    <!--
-        ++ =======================================================================
-        ++ Target: init.default
-        ++ 
-        ++ defines default behavior of this common target
-        ++ =======================================================================
-    -->
-    <target name="init.default">
+    <target name="init" description="Set up the project">
         <mkdir dir="${build.dir}" />
         <mkdir dir="${build.javac.dir}" />
         <mkdir dir="${build.compc.dir}" />
         <mkdir dir="${build.mxmlc.dir}" />
         <mkdir dir="${build.as3doc.dir}" />
-        <mkdir dir="${build.test.dir}" />
         <mkdir dir="${build.stage.dir}" />
         <mkdir dir="${build.dist.dir}" />
     </target>
@@ -110,17 +98,7 @@
         ++ Remove all build assets from a project directory.
         ++ =======================================================================
     -->
-    <target name="clean" depends="clean.default" description="Clean the project"/>
-
-    
-    <!--
-        ++ =======================================================================
-        ++ Target: clean.default
-        ++ 
-        ++ defines default behavior of this common target
-        ++ =======================================================================
-    -->
-    <target name="clean.default">
+    <target name="clean" description="Clean the project">
         <delete dir="${build.dir}" quiet="true"/>
     </target>
 
@@ -248,7 +226,7 @@
             <sequential>
                 <!-- Need to wait a couple of seconds to avoid a race condition in Ant -->
                 <sleep seconds="2" />
-                <exec executable="${flex2.standalone.player}" dir="${basedir}/${build.test.dir}"
+                <exec executable="${flex2.standalone.player}" dir="${basedir}/${build.mxmlc.dir}"
                     failonerror="false" resultproperty="flashplayer.return.code"
                     timeout="${arc-flexunit2.timeout}" vmlauncher="true">
                     <arg value="${project.swf}" />
