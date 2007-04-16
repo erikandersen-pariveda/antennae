@@ -15,7 +15,7 @@
         <antcall target="init.internal"/>
     </target>
 
-    <target name="init.internal" depends="init.default">
+    <target name="init.internal" depends="tools.init">
         <mkdir dir="${antennae.tools.dir}"/>
     </target>
         
@@ -68,7 +68,7 @@
         <antcall target="clean.internal"/>
     </target>
     
-    <target name="clean.internal" depends="clean.default">
+    <target name="clean.internal" depends="tools.clean">
         <delete dir="${antennae.tools.dir}"/>
         <delete>
             <fileset dir="${antennae.lib.dir}">

@@ -60,7 +60,6 @@
     <property name="arc-flexunit2.reportserver.port" value="50031" />
     <property name="arc-flexunit2.reportserver.host" value="localhost" />
     <property name="arc-flexunit2.timeout" value="150000" />
-    <property name="build.test.dir" value="build/test"/>
     
     <!-- javac properties -->
     <property name="javac.debug" value="true"/>
