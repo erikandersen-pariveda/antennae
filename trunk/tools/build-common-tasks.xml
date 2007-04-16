@@ -31,12 +31,12 @@
     <macrodef name="mxmlc" description="">
         <attribute name="src" />
         <attribute name="dest" />
-        <attribute name="src.path" />
-        <attribute name="lib.path" />
-        <attribute name="options" default="" />
+        <attribute name="src.path" default="${src.flex2.dir}" />
+        <attribute name="lib.path.id" default="flex2.lib.path" />
+        <attribute name="options" default="${flex2.mxmlc.options}" />
         <attribute name="config" default="${flex2.config}" />
         <sequential>
-            <pathconvert property="mxmlc2.lib.files" refid="@{lib.path}" pathsep="," />
+            <pathconvert property="mxmlc2.lib.files" refid="@{lib.path.id}" pathsep="," />
             <condition property="mxmlc2.libpath" value="-library-path+=${mxmlc2.lib.files}"
                 else="">
                 <not>
@@ -65,12 +65,12 @@
     <macrodef name="compc" description="">
         <attribute name="src.dir" />
         <attribute name="dest" />
-        <attribute name="lib.path" />
-        <attribute name="options" default="" />
+        <attribute name="lib.path.id" default="flex2.lib.path" />
+        <attribute name="options" default="${flex2.compc.options}" />
         <attribute name="config" default="${flex2.config}" />
 
         <sequential>
-            <pathconvert property="compc2.lib.files" refid="@{lib.path}" pathsep="," />
+            <pathconvert property="compc2.lib.files" refid="@{lib.path.id}" pathsep="," />
             <condition property="compc2.libpath" value="-library-path+=${compc2.lib.files}"
                 else="">
                 <not>
@@ -101,12 +101,12 @@
     -->
     <macrodef name="as3doc" description="">
         <attribute name="src.dir" />
-        <attribute name="lib.path" />
-        <attribute name="options" default="" />
-        <attribute name="config" default="${flex2.config}" />
         <attribute name="as.path" />
         <attribute name="dest.dir" />
-        <attribute name="template.dir" />
+        <attribute name="template.dir" default="${as3doc.template.dir}"/>
+        <attribute name="lib.path.id" default="flex2.lib.path" />
+        <attribute name="options" default="" />
+        <attribute name="config" default="${flex2.config}" />
 
         <sequential>
             <!-- create directories -->
@@ -124,7 +124,7 @@
                 </mapper>
             </pathconvert>
 
-            <pathconvert property="as3doc.lib.files" refid="@{lib.path}" pathsep="," />
+            <pathconvert property="as3doc.lib.files" refid="@{lib.path.id}" pathsep="," />
             <condition property="as3doc.libpath" value="-library-path+=${as3doc.lib.files}"
                 else="">
                 <not>
@@ -152,37 +152,45 @@
 
     <!--
         ++ =======================================================================
+        ++ Macro: java-compile
+        ++ Compile a tree of java source into classes. Copy all non .java files
+        ++ into the classes directory so they can be found via java classloading.
+        ++ =======================================================================
+    -->
+    <macrodef name="java-compile" description="compile Java source tree">
+        <attribute name="src.dir" default="${src.java.dir}" />
+        <attribute name="lib.path.id" default="javac.lib.path" />
+        <attribute name="dest.dir" default="${build.javac.dir}" />
+        <attribute name="debug" default="${javac.debug}" />
+        <sequential>
+            <!-- compile java -->
+            <javac srcdir="@{src.dir}" destdir="@{dest.dir}" debug="@{debug}">
+                <classpath>
+                    <path refid="@{lib.path.id}" />
+                </classpath>
+            </javac>
+
+            <!-- copy everything else -->
+            <copy todir="@{dest.dir}">
+                <fileset dir="@{src.dir}" includes="**/*" excludes="**/*.java" />
+            </copy>
+        </sequential>
+    </macrodef>
+
+    <!--
+        ++ =======================================================================
         ++ Macro: echoAndRun
         ++ For master build files give status of the next project and target being
         ++ called
         ++ =======================================================================
     -->
     <macrodef name="echoAndRun">
-        <attribute name="project" />
+        <attribute name="children.filelist.id" default="children.filelist" />
         <attribute name="target" />
         <sequential>
-            <echo message="Running @{target} on project @{project}" />
-            <ant dir="@{project}" target="@{target}" inheritAll="false" />
-        </sequential>
-    </macrodef>
-
-    <!--
-        ++ =======================================================================
-        ++ Target: check-lib-path
-        ++ Checks if any file in the given lib path is newer than
-        ++ the target file, if so it creates the given timestamp file.
-        ++ =======================================================================
-    -->
-    <macrodef name="check-lib-path">
-        <attribute name="lib.path.name" />
-        <attribute name="target.file" />
-        <attribute name="uptodate.property" />
-        <sequential>
-            <foreach target="uptodate-timestamp" param="check.file">
-                <param name="target.file" value="@{target.file}" />
-                <param name="timestamp.file" value="@{timestamp.file}" />
-                <path refid="@{lib.path.name}" />
-            </foreach>
+            <subant target="@{target}" verbose="true">
+                <filelist refid="@{children.filelist.id}"/>
+            </subant>
         </sequential>
     </macrodef>
 </project>

@@ -1,4 +1,4 @@
 <project>
-    <property name="multi.application.dir" location="${root.dir}/multi/app"/>
-    <property name="multi.application.swf" location="${multi.application.dir}/build/MultiApp.swf"/>
+    <property name="multi.application.dir" location="${multi.dir}/app"/>
+    <property name="multi.application.swf" location="${multi.application.dir}/${build.mxmlc.dir}/MultiApp.swf"/>
 </project>

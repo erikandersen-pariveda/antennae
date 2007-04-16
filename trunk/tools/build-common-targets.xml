@@ -1,0 +1,287 @@
+<!--
+    Copyright (c) 2007 Allurent, Inc.
+    http://code.google.com/p/antennae/
+    
+    Permission is hereby granted, free of charge, to any person obtaining
+    a copy of this software and associated documentation files (the
+    "Software"), to deal in the Software without restriction, including
+    without limitation the rights to use, copy, modify, merge, publish,
+    distribute, sublicense, and/or sell copies of the Software, and to
+    permit persons to whom the Software is furnished to do so, subject to
+    the following conditions:
+    
+    The above copyright notice and this permission notice shall be
+    included in all copies or substantial portions of the Software.
+    
+    THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
+    EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
+    MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
+    NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE
+    LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION
+    OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION
+    WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
+-->
+<project>
+    <!--
+        The following targets are common targets that every project should
+        support and the interdependencies between such targets. 
+        Whenever possible the default behavior is also defined and separated into
+        a name.default target. This allows reuse of the standard logic when creating
+        a master build file that calls into sub projects but also should execute the
+        default behavior.
+    -->
+
+    <!--
+        ++ =======================================================================
+        ++ Target: init
+        ++ 
+        ++ Create all directories and other resources required by miscellaneous targets.
+        ++ =======================================================================
+    -->
+    <target name="init" depends="init.default" description="Set up the project"/>
+
+    <!--
+        ++ =======================================================================
+        ++ Target: init.default
+        ++ 
+        ++ defines default behavior of this common target
+        ++ =======================================================================
+    -->
+    <target name="init.default">
+        <mkdir dir="${build.dir}" />
+        <mkdir dir="${build.javac.dir}" />
+        <mkdir dir="${build.compc.dir}" />
+        <mkdir dir="${build.mxmlc.dir}" />
+        <mkdir dir="${build.as3doc.dir}" />
+        <mkdir dir="${build.test.dir}" />
+        <mkdir dir="${build.stage.dir}" />
+        <mkdir dir="${build.dist.dir}" />
+    </target>
+    
+    <!--
+        ++ =======================================================================
+        ++ Target: build
+        ++ 
+        ++ Build everything
+        ++ =======================================================================
+    -->
+    <target name="build" depends="init" description="Build the project"/>
+
+    <!--
+        ++ =======================================================================
+        ++ Target: test
+        ++ 
+        ++ Test everything
+        ++ =======================================================================
+    -->
+    <target name="test" depends="build" description="Test the project"/>
+
+    <!--
+        ++ =======================================================================
+        ++ Target: stage
+        ++ 
+        ++ Stage the project for creating a distribution
+        ++ =======================================================================
+    -->
+    <target name="stage" depends="build" description="Stage the project"/>
+
+    <!--
+        ++ =======================================================================
+        ++ Target: dist
+        ++ 
+        ++ Create a distribution version of the project
+        ++ =======================================================================
+    -->
+    <target name="dist" depends="stage" description="Create a distribution"/>
+
+    <!--
+        ++ =======================================================================
+        ++ Target: deploy
+        ++ 
+        ++ Deploy the project
+        ++ =======================================================================
+    -->
+    <target name="deploy" depends="dist" description="Deploy the project"/>
+
+    <!--
+        ++ =======================================================================
+        ++ Target: clean
+        ++ 
+        ++ Remove all build assets from a project directory.
+        ++ =======================================================================
+    -->
+    <target name="clean" depends="clean.default" description="Clean the project"/>
+
+    
+    <!--
+        ++ =======================================================================
+        ++ Target: clean.default
+        ++ 
+        ++ defines default behavior of this common target
+        ++ =======================================================================
+    -->
+    <target name="clean.default">
+        <delete dir="${build.dir}" quiet="true"/>
+    </target>
+
+    <!--
+        The following targets are utility targets that define standard targets a
+        project might need to run into order to complete these steps. Based on the
+        properties set via build-common-properties.xml these targets define a reasonable
+        default behavior.
+    -->
+
+    <!--
+        ++ =======================================================================
+        ++ Target: flex2-application
+        ++ 
+        ++ Build a Flex application, including the copying of non-compiled
+        ++ resources.
+        ++ =======================================================================
+    -->
+    <target name="flex2-application" depends="init,flex2-application-check" unless="${project.swf}.compiled" description="Compile the application">
+        <!-- copy all non-source files -->
+        <copy todir="${build.mxmlc.dir}" includeEmptyDirs="false">
+            <fileset dir="${src.flex2.dir}">
+                <exclude name="**/*.as" />
+                <exclude name="**/*.mxml" />
+            </fileset>
+        </copy>
+
+        <!-- invoke MXMLC -->
+        <mxmlc src="${src.flex2.dir}/${project.flex2.application}" dest="${build.mxmlc.dir}/${project.swf}"/>
+    </target>
+
+    <!-- up to date check for flex2-application -->
+    <target name="flex2-application-check">
+        <!-- This somewhat convoluted procedure calculates a comma-delimited
+            list of SWCs relative to the root directory, which can be used
+            below as a matching "pattern" for an <uptodate> fileset. -->
+        <pathconvert property="flex2.lib.files" refid="flex2.lib.path" pathsep=",">
+            <globmapper from="${root.dir}/*" to="*" handledirsep="true" />
+        </pathconvert>
+
+        <!-- Default the SWC list to a pattern that matches nothing if none were speced -->
+        <condition property="mxmlc.lib.files" value="${flex2.lib.files}" else="__no_match__">
+            <not>
+                <equals arg1="" arg2="${flex2.lib.files}" trim="true" />
+            </not>
+        </condition>
+
+        <uptodate property="${project.swf}.compiled" targetfile="${build.mxmlc.dir}/${project.swf}">
+            <srcfiles dir="${src.flex2.dir}" includes="**/*" />
+            <srcfiles dir="${root.dir}" includes="${mxmlc.lib.files}" />
+        </uptodate>
+    </target>
+
+    <!--
+        ++ =======================================================================
+        ++ Target: flex2-library
+        ++ 
+        ++ Build a Flex SWC.
+        ++ =======================================================================
+    -->
+    <target name="flex2-library" depends="init,flex2-library-check"
+        unless="${project.swc}.compiled" description="compile flex code into a SWC">
+        <compc src.dir="${src.flex2.dir}" dest="${build.compc.dir}/${project.swc}"/>
+    </target>
+
+    <!-- up to date check for flex-classes -->
+    <target name="flex2-library-check">
+        <!-- avoid error if no generated files exist -->
+        <pathconvert property="flex2.lib.files" refid="flex2.lib.path" pathsep=",">
+            <globmapper from="${root.dir}/*" to="*" handledirsep="true" />
+        </pathconvert>
+
+        <condition property="compc.lib.files" value="${flex2.lib.files}" else="__no_match__">
+            <not>
+                <equals arg1="" arg2="${flex2.lib.files}" trim="true" />
+            </not>
+        </condition>
+
+        <uptodate property="${project.swc}.compiled" targetfile="${build.compc.dir}/${project.swc}">
+            <srcfiles dir="${src.flex2.dir}" includes="**/*" />
+            <srcfiles dir="${root.dir}" includes="${compc.lib.files}" />
+        </uptodate>
+    </target>
+
+    <!--
+        ++ =======================================================================
+        ++ Target: doc
+        ++ Create AS3Doc files for the project
+        ++ =======================================================================
+    -->
+    <target name="as3doc" depends="init,as3doc-check"
+        unless="as3doc.uptodate" description="create AS3 docs">
+        <as3doc src.dir="${src.flex2.dir}" as.path="${src.flex2.dir}" dest.dir="${build.as3doc.dir}"/>
+    </target>
+
+    <!-- up to date check for as3doc -->
+    <target name="as3doc-check">
+        <uptodate property="as3doc.uptodate" targetfile="${build.as3doc.dir}/index.html">
+            <srcfiles dir="${src.flex2.dir}" includes="**/*" />
+        </uptodate>
+    </target>
+
+    <!--
+        ++ =======================================================================
+        ++ Target: test-flexunit2
+        ++ 
+        ++ Run Flexunit2 tests
+        ++ =======================================================================
+    -->
+    <target name="test-flexunit2" depends="init">
+        <parallel>
+            <!-- Start the ReportServer and listen for results from the standalone player.    -->
+            <java classname="com.allurent.flexunit2.framework.UnitTestReportServer"
+                outputproperty="server.output" fork="true"
+                resultproperty="reportserver.return.code"
+                timeout="${arc-flexunit2.timeout}">
+                <classpath>
+                    <pathelement location="${arc-flexunit2.jar}" />
+                </classpath>
+
+                <arg value="${arc-flexunit2.reportserver.port}" />
+            </java>
+
+            <!-- Start the standalone player with the swf.  Tests execute when the standalone player loads the swf. -->
+            <sequential>
+                <!-- Need to wait a couple of seconds to avoid a race condition in Ant -->
+                <sleep seconds="2" />
+                <exec executable="${flex2.standalone.player}" dir="${basedir}/${build.test.dir}"
+                    failonerror="false" resultproperty="flashplayer.return.code"
+                    timeout="${arc-flexunit2.timeout}" vmlauncher="true">
+                    <arg value="${project.swf}" />
+                    <env key="DISPLAY" value="${environment.display}" />
+                </exec>
+            </sequential>
+        </parallel>
+
+        <echo message="${server.output}" />
+
+        <condition property="flexunit2.failed">
+            <not>
+                <and>
+                    <equals arg1="0" arg2="${reportserver.return.code}" />
+                    <equals arg1="0" arg2="${flashplayer.return.code}" />
+                </and>
+            </not>
+        </condition>
+        <antcall target="test-flexunit2-failure" />
+    </target>
+
+    <target name="test-flexunit2-failure" if="flexunit2.failed">
+        <fail message="Test suite failed" />
+    </target>
+    
+    <!--
+        ++ =======================================================================
+        ++ Target: java-classes
+        ++ 
+        ++ Compile java files
+        ++ =======================================================================
+    -->
+    <target name="java-classes" depends="init">
+        <java-compile debug="${javac.debug}" />        
+    </target>
+</project>

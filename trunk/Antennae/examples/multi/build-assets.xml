@@ -5,8 +5,15 @@
     definitions are shared across those subprojects so that assets
     exported by one project can be referenced by another,
     without knowing the exact location of the exported asset.
+
+    Note that all paths are defined
+    relative to ${root.dir} since we don't know what the current
+    directory is in which Ant is running.
 -->
 <project>
+    <!-- For convenience, set up the name of the multi directory -->
+    <property name="multi.dir" location="${root.dir}/examples/multi"/>
+
     <import file="library1/build-assets.xml"/>
     <import file="library2/build-assets.xml"/>
     <import file="app/build-assets.xml"/>

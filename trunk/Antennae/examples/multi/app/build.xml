@@ -4,10 +4,9 @@
     <property name="project.name" value="MultiApp"/>
     <!--
         Root directory needs to be a fixed location across all projects that use the common files.
-        This is case it is fixed at the root of the examples directory
+        This is case it is fixed at the root of the Antennae directory.
     -->
-    <property name="root.dir" location="../.."/>
-    <property name="app.stage.dir" location="build/stage"/>
+    <property name="root.dir" location="../../.."/>
     <import file="build-imports.xml"/>
 
     <path id="flex2.lib.path">
@@ -18,14 +17,14 @@
     <!-- targets -->
     <target name="build" depends="init,flex2-application" description="Build the application"/>
 
-    <target name="stage" description="Stage the application">
-        <mkdir dir="${app.stage.dir}"/>
-        <copy todir="${app.stage.dir}">
+    <target name="stage" depends="build" description="Stage the application">
+        <mkdir dir="${build.stage.dir}"/>
+        <copy todir="${build.stage.dir}">
             <fileset dir="web">
                 <exclude name="**/template.*" />
             </fileset>
         </copy>
-        <copy todir="${app.stage.dir}">
+        <copy todir="${build.stage.dir}">
             <fileset dir="web">
                 <include name="**/template.*" />
             </fileset>
@@ -35,17 +34,16 @@
             </filterset>
             <regexpmapper from="(.*)template\.(.*)" to="\1\2" />
         </copy>
-        <copy todir="${app.stage.dir}">
-            <fileset dir="build">
-                <exclude name="stage/**.*"/>
-            </fileset>
+        <copy todir="${build.stage.dir}">
+            <fileset dir="${build.mxmlc.dir}"/>
         </copy>
     </target>
 
-    <target name="deploy" depends="stage" description="Deploy the application">
-        <war destfile="build/${project.war}" basedir="${app.stage.dir}" webxml="${app.stage.dir}/WEB-INF/web.xml"/>
-        <copy todir="${tomcat.webapps.dir}" file="build/${project.war}"/>
+    <target name="dist" depends="stage">
+        <war destfile="${build.dist.dir}/${project.war}" basedir="${build.stage.dir}" webxml="${build.stage.dir}/WEB-INF/web.xml"/>
     </target>
-
-    <target name="all" depends="build,deploy"/>
+    
+    <target name="deploy" depends="dist" description="Deploy the application">
+        <copy todir="${tomcat.webapps.dir}" file="${build.dist.dir}/${project.war}"/>
+    </target>
 </project>

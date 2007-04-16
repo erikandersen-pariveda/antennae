@@ -1,4 +1,4 @@
 <project>
-    <property name="multi.library2.dir" location="${root.dir}/multi/library2"/>
-    <property name="multi.library2.swc" location="${multi.library2.dir}/build/library2.swc"/>
+    <property name="multi.library2.dir" location="${multi.dir}/library2"/>
+    <property name="multi.library2.swc" location="${multi.library2.dir}/${build.compc.dir}/library2.swc"/>
 </project>

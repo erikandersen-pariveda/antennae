@@ -1,0 +1,9 @@
+<project>
+    <property file="${root.dir}/build-user.properties" />
+    <import file="${root.dir}/tools/build-common-properties.xml" />
+
+    <import file="${root.dir}/tools/build-common-tasks.xml" />
+    <import file="${root.dir}/tools/build-common-targets.xml" />
+
+    <import file="${root.dir}/build-assets.xml" />
+</project>
