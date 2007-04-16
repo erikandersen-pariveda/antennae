@@ -22,6 +22,8 @@
     WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 -->
 <project name="tools.properties">
+    <dirname property="tools.properties.dir" file="${ant.file.tools.properties}"/>
+
     <!-- derived project properties -->
     <property name="project.name" value="${ant.project.name}" />
     <property name="project.swf" value="${project.name}.swf" />
@@ -34,6 +36,8 @@
     <property name="build.dir" value="build"/>
     <property name="build.stage.dir" value="build/stage"/>
     <property name="build.dist.dir" value="build/dist"/>
+    <!-- the base directory which all assets fall under, see flex2-* targets -->
+    <property name="uptodate.dir" location="${tools.properties.dir}/.."/>
     
     <!-- flex2 properties -->
     <property name="flex2.dir" value="" />

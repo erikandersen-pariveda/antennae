@@ -1,5 +1,4 @@
 <project name="arc-flexunit2" default="stage">
-    <property name="root.dir" location=".." />
     <import file="build-imports.xml" />
 
     <path id="flex2.lib.path">

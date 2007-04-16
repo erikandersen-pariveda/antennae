@@ -3,11 +3,6 @@
     targets that invoke their counterparts in the various subprojects.
 -->
 <project name="multi" default="build" basedir=".">
-    <!--
-        Root directory needs to be a fixed location across all projects that use the common files.
-        This is case it is fixed at the root of the Antennae directory.
-    -->
-    <property name="root.dir" location="../.." />
     <import file="build-imports.xml" />
 
     <filelist id="children.filelist" dir=".">

@@ -1,5 +1,5 @@
 <project name="lib.assets">
-    <property name="lib.dir" location="${root.dir}/lib" />
+    <dirname property="lib.assets.dir" file="${ant.file.lib.assets}"/>
 
-    <property name="flexunit2.swc" location="${lib.dir}/flexunit2.swc"/>
+    <property name="flexunit2.swc" location="${lib.assets.dir}/flexunit2.swc"/>
 </project>
