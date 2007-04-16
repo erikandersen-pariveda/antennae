@@ -2,38 +2,46 @@
     Master build file for 'multi' project.  Contains an assortment of
     targets that invoke their counterparts in the various subprojects.
 -->
-<project default="build" basedir=".">
+<project name="multi" default="build" basedir=".">
     <!--
         Root directory needs to be a fixed location across all projects that use the common files.
-        This is case it is fixed at the root of the examples directory
+        This is case it is fixed at the root of the Antennae directory.
     -->
-    <property name="root.dir" location=".." />
-    <import file="build-imports.xml"/>
+    <property name="root.dir" location="../.." />
+    <import file="build-imports.xml" />
 
-    <target name="clean" description="Clean all projects">
-        <echoAndRun project="library1" target="clean" />
-        <echoAndRun project="library2" target="clean" />
-        <echoAndRun project="app" target="clean" />
-        <echoAndRun project="test" target="clean" />
+    <filelist id="children.filelist" dir=".">
+        <file name="library1"/>
+        <file name="library2"/>
+        <file name="app"/>
+        <file name="test"/>
+    </filelist>
+
+    <target name="init">
+        <echoAndRun target="init"/>
     </target>
 
-    <target name="build" description="Build all projects">
-        <echoAndRun project="library1" target="build" />
-        <echoAndRun project="library2" target="build" />
-        <echoAndRun project="app" target="build" />
+    <target name="build">
+        <echoAndRun target="build"/>
     </target>
 
-    <target name="doc" description="Create documentation for all projects">
-        <echoAndRun project="library1" target="doc" />
-        <echoAndRun project="library2" target="doc" />
-        <echoAndRun project="app" target="doc" />
+    <target name="test">
+        <echoAndRun target="test"/>
     </target>
 
-    <target name="deploy" depends="build" description="Deploy application project">
-        <echoAndRun project="app" target="deploy" />
+    <target name="stage">
+        <echoAndRun target="stage"/>
     </target>
 
-    <target name="test" description="Test all projects" depends="build">
-        <echoAndRun project="test" target="test" />
+    <target name="dist">
+        <echoAndRun target="dist"/>
+    </target>
+
+    <target name="deploy">
+        <echoAndRun target="deploy"/>
+    </target>
+
+    <target name="clean">
+        <echoAndRun target="clean"/>
     </target>
 </project>

@@ -1,0 +1,4 @@
+<project>
+    <import file="lib/build-assets.xml"/>
+    <import file="examples/build-assets.xml"/>
+</project>

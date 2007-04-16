@@ -1,11 +1,5 @@
 <!-- build-imports.xml: this file pulls in any definitions needed
     for this directory and its descendants. -->
 <project>
-    <property file="${root.dir}/build-user.properties" />
-
-    <import file="${root.dir}/../tools/build-common-properties.xml" />
-    <import file="${root.dir}/../tools/build-common-tasks.xml" />
-    <import file="${root.dir}/../tools/build-common-targets.xml" />
-
-    <import file="${root.dir}/build-assets.xml" />
+    <import file="../build-imports.xml" />
 </project>
