@@ -21,7 +21,7 @@
     OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION
     WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 -->
-<project>
+<project name="tools.properties">
     <!-- derived project properties -->
     <property name="project.name" value="${ant.project.name}" />
     <property name="project.swf" value="${project.name}.swf" />

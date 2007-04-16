@@ -1,4 +1,4 @@
-<project>
+<project name="library2.assets">
     <property name="multi.library2.dir" location="${multi.dir}/library2"/>
     <property name="multi.library2.swc" location="${multi.library2.dir}/${build.compc.dir}/library2.swc"/>
 </project>

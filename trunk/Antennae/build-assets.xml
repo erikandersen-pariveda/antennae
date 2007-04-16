@@ -1,4 +1,4 @@
-<project>
+<project name="Antennae.assets">
     <import file="lib/build-assets.xml"/>
     <import file="examples/build-assets.xml"/>
 </project>

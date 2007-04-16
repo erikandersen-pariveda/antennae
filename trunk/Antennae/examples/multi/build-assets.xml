@@ -10,7 +10,7 @@
     relative to ${root.dir} since we don't know what the current
     directory is in which Ant is running.
 -->
-<project>
+<project name="multi.assets">
     <!-- For convenience, set up the name of the multi directory -->
     <property name="multi.dir" location="${root.dir}/examples/multi"/>
 

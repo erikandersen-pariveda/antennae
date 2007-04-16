@@ -1,4 +1,4 @@
-<project>
+<project name="lib.assets">
     <property name="lib.dir" location="${root.dir}/lib" />
 
     <property name="flexunit2.swc" location="${lib.dir}/flexunit2.swc"/>
