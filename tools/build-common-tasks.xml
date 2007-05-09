@@ -36,6 +36,13 @@
         <attribute name="options" default="${flex2.mxmlc.options}" />
         <attribute name="config" default="${flex2.config}" />
         <sequential>
+            <fail>
+                <condition>
+                    <not>
+                        <isreference refid="@{lib.path.id}"/>
+                    </not>
+                </condition>
+            </fail>
             <pathconvert property="mxmlc2.lib.files" refid="@{lib.path.id}" pathsep="," />
             <condition property="mxmlc2.libpath" value="-library-path+=${mxmlc2.lib.files}"
                 else="">
@@ -70,6 +77,13 @@
         <attribute name="config" default="${flex2.config}" />
 
         <sequential>
+            <fail>
+                <condition>
+                    <not>
+                        <isreference refid="@{lib.path.id}"/>
+                    </not>
+                </condition>
+            </fail>
             <pathconvert property="compc2.lib.files" refid="@{lib.path.id}" pathsep="," />
             <condition property="compc2.libpath" value="-library-path+=${compc2.lib.files}"
                 else="">
@@ -109,9 +123,6 @@
         <attribute name="config" default="${flex2.config}" />
 
         <sequential>
-            <!-- create directories -->
-            <mkdir dir="@{dest.dir}" />
-
             <pathconvert property="as3doc.src.files" pathsep="," dirsep=".">
                 <path>
                     <fileset dir="@{src.dir}">
@@ -124,6 +135,13 @@
                 </mapper>
             </pathconvert>
 
+            <fail>
+                <condition>
+                    <not>
+                        <isreference refid="@{lib.path.id}"/>
+                    </not>
+                </condition>
+            </fail>
             <pathconvert property="as3doc.lib.files" refid="@{lib.path.id}" pathsep="," />
             <condition property="as3doc.libpath" value="-library-path+=${as3doc.lib.files}"
                 else="">
@@ -163,6 +181,13 @@
         <attribute name="dest.dir" default="${build.javac.dir}" />
         <attribute name="debug" default="${javac.debug}" />
         <sequential>
+            <fail>
+                <condition>
+                    <not>
+                        <isreference refid="@{lib.path.id}"/>
+                    </not>
+                </condition>
+            </fail>
             <!-- compile java -->
             <javac srcdir="@{src.dir}" destdir="@{dest.dir}" debug="@{debug}">
                 <classpath>

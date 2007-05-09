@@ -1,0 +1,17 @@
+<project name="SampleLibrary" default="build">
+    <!-- Project specific overrides -->
+
+    <!-- Shared properties -->
+    <property file="../../build-user.properties" />
+
+    <!-- Common properties and targets -->
+    <import file="../../tools/build-common-properties.xml" />
+    <import file="../../tools/build-common-tasks.xml" />
+    <import file="../../tools/build-common-targets.xml" />
+
+    <!-- Build path -->
+    <path id="flex2.lib.path"/>
+
+    <!-- Project specific targets -->
+    <target name="build" depends="init,flex2-library" description="Build the library" />
+</project>

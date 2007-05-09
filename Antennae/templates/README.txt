@@ -22,36 +22,17 @@
 # WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 ################################################################
 
-This is the root of the development source tree for Antennae.
-It includes the source for arc-flexunit2, the light-weight way
-to run FlexUnit tests from the command line, along with the
-source that makes up the end-user Antennae distribution.
+This directory contains skeleton projects that can be used to
+jump start using Antennae. The steps are:
 
-It is designed to allow testing everything under the Antennae
-directory as if a user had just unpacked it. To get it into
-this state follow these steps:
+1) Make a copy of the desired folder
+2) Adjust the paths and project names in the build.xml files
+3) Create a sub-directory called flex2 and add your source code
 
-    1. Create a build-user.properties file (or copy an
-       existing version) in the root directory where
-       you found this README.txt file. (See
-       [root]\Antennae\*.build-user.properties
-       for sample files.)
+SampleApplication is for creating a Flex Application (.swf).
 
-    2. Open a console (aka command prompt window) and
-       use the cd command to switch to the same root
-       directory.
+SampleLibrary is for creating a Flex Library (.swc).
 
-    3. Type "ant stage" and hit return.
+SampleProject is for creating a project that includes both a Flex Library
+	and a Flex Application, to demonstrate inter project dependencies.
 
-This will copy all of the files that make up the
-distribution into the [root]\Antennae subdirectory.
-
-Once completed you can cd into [root]\Antennae and test
-out the samples.
-
-For more details on Antennae, see
-[root]\Antennae\README.txt.
-
-For more details on Ant, see
-http://ant.apache.org/manual/
-    

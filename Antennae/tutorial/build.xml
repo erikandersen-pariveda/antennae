@@ -1,8 +1,10 @@
-<project name="Antennae" default="build" basedir=".">
+<!-- Master build file for all projects -->
+<project name="tutorial" default="build" basedir=".">
     <import file="build-imports.xml" />
 
     <filelist id="children.filelist" dir=".">
-        <file name="tutorial"/>
+        <file name="app2"/>
+        <file name="multi"/>
     </filelist>
 
     <target name="init">
