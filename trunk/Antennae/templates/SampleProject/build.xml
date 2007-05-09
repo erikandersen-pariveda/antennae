@@ -1,10 +1,17 @@
-<!-- Master build file for all projects -->
-<project name="examples" default="build" basedir=".">
+<!--
+    Master build file for complex projects. Contains 
+    targets that invoke their counterparts in the various subprojects.
+-->
+<project name="SampleProject" default="build" basedir=".">
     <import file="build-imports.xml" />
 
+    <!--
+        A filelist defines an ordered list that is used to
+        encode the project build order that should be used
+    -->
     <filelist id="children.filelist" dir=".">
-        <file name="app2"/>
-        <file name="multi"/>
+        <file name="SampleLibrary"/>
+        <file name="SampleApplication"/>
     </filelist>
 
     <target name="init">

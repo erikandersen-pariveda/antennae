@@ -69,16 +69,20 @@ NOTICE.txt
 	Notice about other software that this project uses.
 
 lib/
-	External tools needed by the examples to compile and run FlexUnit
+	External tools needed to compile and run FlexUnit
 	tests from the command line.
 
 tools/
 	Common Ant targets and tasks that are shared across all projects.
 	
-examples/
+templates/
+	Directory structure and build files that can be easily copied and used
+	to jump start development.
+
+tutorial/
 	Example projects that use Ant to perform various project compilation
 	and testing scenarios. See the README.txt in this directory for additional
-	information.
+	information. These are designed to help introduce Ant.
 
 * BUILD PHILOSOPHY
 
@@ -107,11 +111,24 @@ build.xml
 	
 project properties
 	The shared build logic relies on an individual project to define pieces that
-	are unique to it. Antennae defines reasonable, but if a particular
+	are unique to it. Antennae defines reasonable defaults, but if a particular
 	project uses a different structure, such as placing the source code in a different
 	folder, the project specific properties will take precedence over any imported
 	default. It is important that these project specific properties appear before 
 	any import statements.
+	
+	For certain targets, Antennae requires that a path be set and does not provide
+	a default. This is done to avoid warning messages from Ant and in most cases
+	the path would needs to be overridden anyway. Examples of this behavior are:
+
+	<path id="flex2.lib.path" /> : Must be defined for any flex related target
+	<path id="javac.lib.path" /> : Must be defined for any java related target
+
+	If such a path hasn't been defined a build failure such as this will occur:
+
+	Reference flex2.lib.path not found.
+	
+	It is okay to define an empty path like the two shown above.
 	
 imports
 	The import mechanism used by Antennae helps share code, centralize
@@ -119,8 +136,8 @@ imports
 	this Antennae uses two types of imports: build-imports.xml which walk
 	up the directory hierarchy and build-assets.xml that walk down the directory hierarchy.
 	
-	The build-imports.xml are designed to pull in
-	shared code and centralized configuration. In most cases a build-imports.xml file
+	The build-imports.xml are designed to pull in shared code and centralized configuration
+	into individual projects. In most cases a build-imports.xml file
 	will just reference its parent and not do anything itself. Most of
 	the sample build-imports.xml files included in Antennae follow this pattern.
 	
@@ -146,7 +163,7 @@ target overrides
 	stage: Used to copy files and create a directory structure that mirrors the distribution
 	dist: Used to create the distribution that will be given to others
 	deploy: Used to deploy the distribution to a location
-	clean: Used to remove everything that all of the other targets created
+	clean: Used to remove everything that all of the other targets created, expect deploy
 	
 	The default implementation of these targets, excluding init and clean, do nothing.
 	The reason that they exist is to make it easy to define only the targets that are
