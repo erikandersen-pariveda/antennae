@@ -1,4 +1,6 @@
 <project name="antennae" default="dist" basedir=".">
+    <!-- Import a special target set for master build files -->
+    <import file="tools/build-master-targets.xml" />
     <import file="build-imports.xml" />
 
     <property name="antennae.dir" location="Antennae"/>
@@ -18,10 +20,6 @@
         <mkdir dir="${antennae.tools.dir}"/>
     </target>
         
-    <target name="build">
-        <echoAndRun target="build"/>
-    </target>
-
     <target name="stage">
         <echoAndRun target="stage"/>
         <antcall target="stage.internal"/>
@@ -56,10 +54,6 @@
                 <exclude name="**/build-user.properties"/>
             </zipfileset>
         </zip>
-    </target>
-
-    <target name="deploy">
-        <echoAndRun target="deploy"/>
     </target>
 
     <target name="clean">

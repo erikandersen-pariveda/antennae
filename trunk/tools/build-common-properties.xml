@@ -22,7 +22,7 @@
     WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 -->
 <project name="tools.properties">
-    <dirname property="tools.properties.dir" file="${ant.file.tools.properties}"/>
+    <dirname property="tools.properties.dir" file="${ant.file.tools.properties}" />
 
     <!-- derived project properties -->
     <property name="project.name" value="${ant.project.name}" />
@@ -33,12 +33,12 @@
     <property name="project.war" value="${project.name}.war" />
 
     <!-- build properties -->
-    <property name="build.dir" value="build"/>
-    <property name="build.stage.dir" value="build/stage"/>
-    <property name="build.dist.dir" value="build/dist"/>
+    <property name="build.dir" value="build" />
+    <property name="build.stage.dir" value="build/stage" />
+    <property name="build.dist.dir" value="build/dist" />
     <!-- the base directory which all assets fall under, see flex2-* targets -->
-    <property name="uptodate.dir" location="${tools.properties.dir}/.."/>
-    
+    <property name="uptodate.dir" location="${tools.properties.dir}/.." />
+
     <!-- flex2 properties -->
     <property name="flex2.dir" value="" />
     <property name="flex2.frameworks.dir" value="${flex2.dir}/frameworks" />
@@ -48,25 +48,27 @@
     <property name="flex2.mxmlc.jar" value="${flex2.dist.lib}/mxmlc.jar" />
     <property name="flex2.mxmlc.options" value="" />
     <property name="flex2.compc.options" value="" />
-    <property name="src.flex2.dir" value="flex2"/>
-    <property name="build.compc.dir" value="${build.dir}/swc/"/>
-    <property name="build.mxmlc.dir" value="${build.dir}/swf/"/>
-    
+    <property name="src.flex2.dir" value="flex2" />
+    <property name="build.compc.dir" value="${build.dir}/swc/" />
+    <property name="build.mxmlc.dir" value="${build.dir}/swf/" />
+
     <!-- as3doc properties -->
     <property name="as3doc.template.dir" value="${flex2.dir}/asdoc/templates" />
     <property name="as3doc.jar" value="${flex2.dir}/lib/asdoc.jar" />
     <property name="as3doc.xalan.jar" value="${flex2.dir}/asdoc/lib/xalan.jar" />
-    <property name="build.as3doc.dir" value="${build.dir}/asdoc/"/>
+    <property name="build.as3doc.dir" value="${build.dir}/asdoc/" />
 
     <!-- arc-flexunit2 properties -->
     <property name="arc-flexunit2.loglevel" value="info" />
-    <property name="arc-flexunit2.alltests.suite" value="FlexUnitAllTests.suite()" />
+    <property name="arc-flexunit2.class" value="FlexUnitAllTests" />
+    <property name="arc-flexunit2.alltests.suite" value="${arc-flexunit2.class}.suite()" />
     <property name="arc-flexunit2.reportserver.port" value="50031" />
     <property name="arc-flexunit2.reportserver.host" value="localhost" />
     <property name="arc-flexunit2.timeout" value="150000" />
-    
+    <property name="arc-flexunit2.filters" value="flexunit2.filters" />
+
     <!-- javac properties -->
-    <property name="javac.debug" value="true"/>
-    <property name="src.java.dir" value="java"/>
-    <property name="build.javac.dir" value="build/classes"/>
+    <property name="javac.debug" value="true" />
+    <property name="src.java.dir" value="java" />
+    <property name="build.javac.dir" value="build/classes" />
 </project>

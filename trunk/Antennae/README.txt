@@ -154,8 +154,8 @@ imports
 	
 target overrides
 	Antennae defines a set of top level build targets that represent the standard
-	steps of building software. These are: init, build, test, stage, dist, deploy, and
-	clean. They are described below:
+	steps of building software. These are: init, build, test, stage, dist, deploy,
+	clean, and undeploy. They are described below:
 	
 	init: Used to setup the directories needed for all the other targets
 	build: Used to build the software, this mostly consists of just compiling information
@@ -164,6 +164,7 @@ target overrides
 	dist: Used to create the distribution that will be given to others
 	deploy: Used to deploy the distribution to a location
 	clean: Used to remove everything that all of the other targets created, expect deploy
+	undeploy: Used to undeploy the distribution
 	
 	The default implementation of these targets, excluding init and clean, do nothing.
 	The reason that they exist is to make it easy to define only the targets that are
