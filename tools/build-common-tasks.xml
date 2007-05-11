@@ -43,6 +43,7 @@
                     </not>
                 </condition>
             </fail>
+
             <pathconvert property="mxmlc2.lib.files" refid="@{lib.path.id}" pathsep="," />
             <condition property="mxmlc2.libpath" value="-library-path+=${mxmlc2.lib.files}"
                 else="">
@@ -84,6 +85,7 @@
                     </not>
                 </condition>
             </fail>
+
             <pathconvert property="compc2.lib.files" refid="@{lib.path.id}" pathsep="," />
             <condition property="compc2.libpath" value="-library-path+=${compc2.lib.files}"
                 else="">
@@ -91,8 +93,6 @@
                     <equals arg1="" arg2="${compc2.lib.files}" trim="true" />
                 </not>
             </condition>
-
-            <delete quiet="${quiet}" file="@{dest}" />
 
             <java jar="${flex2.compc.jar}" dir="." fork="true" failonerror="true">
                 <jvmarg value="-Xmx512m" />
@@ -103,7 +103,6 @@
                 <arg value="-include-sources=@{src.dir}" />
                 <arg value="-output=@{dest}" />
             </java>
-
         </sequential>
     </macrodef>
 
@@ -142,6 +141,7 @@
                     </not>
                 </condition>
             </fail>
+
             <pathconvert property="as3doc.lib.files" refid="@{lib.path.id}" pathsep="," />
             <condition property="as3doc.libpath" value="-library-path+=${as3doc.lib.files}"
                 else="">
@@ -188,17 +188,13 @@
                     </not>
                 </condition>
             </fail>
+
             <!-- compile java -->
             <javac srcdir="@{src.dir}" destdir="@{dest.dir}" debug="@{debug}">
                 <classpath>
                     <path refid="@{lib.path.id}" />
                 </classpath>
             </javac>
-
-            <!-- copy everything else -->
-            <copy todir="@{dest.dir}">
-                <fileset dir="@{src.dir}" includes="**/*" excludes="**/*.java" />
-            </copy>
         </sequential>
     </macrodef>
 
@@ -213,6 +209,14 @@
         <attribute name="children.filelist.id" default="children.filelist" />
         <attribute name="target" />
         <sequential>
+            <fail>
+                <condition>
+                    <not>
+                        <isreference refid="@{children.filelist.id}"/>
+                    </not>
+                </condition>
+            </fail>
+
             <subant target="@{target}" verbose="true">
                 <filelist refid="@{children.filelist.id}"/>
             </subant>

@@ -45,7 +45,7 @@
         <mkdir dir="${build.stage.dir}" />
         <mkdir dir="${build.dist.dir}" />
     </target>
-    
+
     <!--
         ++ =======================================================================
         ++ Target: build
@@ -53,7 +53,7 @@
         ++ Build everything
         ++ =======================================================================
     -->
-    <target name="build" depends="init" description="Build the project"/>
+    <target name="build" depends="init" description="Build the project" />
 
     <!--
         ++ =======================================================================
@@ -62,7 +62,7 @@
         ++ Test everything
         ++ =======================================================================
     -->
-    <target name="test" depends="build" description="Test the project"/>
+    <target name="test" depends="build" description="Test the project" />
 
     <!--
         ++ =======================================================================
@@ -71,7 +71,7 @@
         ++ Stage the project for creating a distribution
         ++ =======================================================================
     -->
-    <target name="stage" depends="build" description="Stage the project"/>
+    <target name="stage" depends="build" description="Stage the project" />
 
     <!--
         ++ =======================================================================
@@ -80,7 +80,7 @@
         ++ Create a distribution version of the project
         ++ =======================================================================
     -->
-    <target name="dist" depends="stage" description="Create a distribution"/>
+    <target name="dist" depends="stage" description="Create a distribution" />
 
     <!--
         ++ =======================================================================
@@ -89,7 +89,7 @@
         ++ Deploy the project
         ++ =======================================================================
     -->
-    <target name="deploy" depends="dist" description="Deploy the project"/>
+    <target name="deploy" depends="dist" description="Deploy the project" />
 
     <!--
         ++ =======================================================================
@@ -99,8 +99,27 @@
         ++ =======================================================================
     -->
     <target name="clean" description="Clean the project">
-        <delete dir="${build.dir}" quiet="true"/>
+        <!--
+            Manually delete each one in case one of them
+            was moved to a directory not under build.dir
+        -->
+        <delete dir="${build.dist.dir}" quiet="true" />
+        <delete dir="${build.stage.dir}" quiet="true" />
+        <delete dir="${build.as3doc.dir}" quiet="true" />
+        <delete dir="${build.mxmlc.dir}" quiet="true" />
+        <delete dir="${build.compc.dir}" quiet="true" />
+        <delete dir="${build.javac.dir}" quiet="true" />
+        <delete dir="${build.dir}" quiet="true" />
     </target>
+
+    <!--
+        ++ =======================================================================
+        ++ Target: undeploy
+        ++ 
+        ++ Undeploy the project
+        ++ =======================================================================
+    -->
+    <target name="undeploy" description="Undeploy the project" />
 
     <!--
         The following targets are utility targets that define standard targets a
@@ -117,24 +136,37 @@
         ++ resources.
         ++ =======================================================================
     -->
-    <target name="flex2-application" depends="init,flex2-application-check" unless="${project.swf}.compiled" description="Compile the application">
-        <!-- copy all non-source files -->
+    <target name="flex2-application" depends="init,flex2-application-check,flex2-application-copy"
+        unless="${project.swf}.compiled" description="Compile the application">
+        <mxmlc src="${src.flex2.dir}/${project.flex2.application}"
+            dest="${build.mxmlc.dir}/${project.swf}" />
+    </target>
+
+    <!--
+        ++ =======================================================================
+        ++ Target: flex2-application-copy
+        ++ 
+        ++ Copies all files not part of the compile step to the destination
+        ++ directory
+        ++ Separate target to copy non-source files to allow easy customization
+        ++ =======================================================================
+    -->
+    <target name="flex2-application-copy">
         <copy todir="${build.mxmlc.dir}" includeEmptyDirs="false">
             <fileset dir="${src.flex2.dir}">
                 <exclude name="**/*.as" />
                 <exclude name="**/*.mxml" />
             </fileset>
         </copy>
-
-        <!-- invoke MXMLC -->
-        <mxmlc src="${src.flex2.dir}/${project.flex2.application}" dest="${build.mxmlc.dir}/${project.swf}"/>
     </target>
 
     <!-- up to date check for flex2-application -->
     <target name="flex2-application-check">
-        <!-- This somewhat convoluted procedure calculates a comma-delimited
+        <!--
+            This somewhat convoluted procedure calculates a comma-delimited
             list of SWCs relative to the root directory, which can be used
-            below as a matching "pattern" for an <uptodate> fileset. -->
+            below as a matching "pattern" for an <uptodate> fileset.
+        -->
         <pathconvert property="flex2.lib.files" refid="flex2.lib.path" pathsep=",">
             <globmapper from="${uptodate.dir}/*" to="*" handledirsep="true" />
         </pathconvert>
@@ -146,7 +178,8 @@
             </not>
         </condition>
 
-        <uptodate property="${project.swf}.compiled" targetfile="${build.mxmlc.dir}/${project.swf}">
+        <uptodate property="${project.swf}.compiled"
+            targetfile="${build.mxmlc.dir}/${project.swf}">
             <srcfiles dir="${src.flex2.dir}" includes="**/*" />
             <srcfiles dir="${uptodate.dir}" includes="${mxmlc.lib.files}" />
         </uptodate>
@@ -159,9 +192,9 @@
         ++ Build a Flex SWC.
         ++ =======================================================================
     -->
-    <target name="flex2-library" depends="init,flex2-library-check"
-        unless="${project.swc}.compiled" description="compile flex code into a SWC">
-        <compc src.dir="${src.flex2.dir}" dest="${build.compc.dir}/${project.swc}"/>
+    <target name="flex2-library" depends="init,flex2-library-check" unless="${project.swc}.compiled"
+        description="compile flex code into a SWC">
+        <compc src.dir="${src.flex2.dir}" dest="${build.compc.dir}/${project.swc}" />
     </target>
 
     <!-- up to date check for flex-classes -->
@@ -177,7 +210,8 @@
             </not>
         </condition>
 
-        <uptodate property="${project.swc}.compiled" targetfile="${build.compc.dir}/${project.swc}">
+        <uptodate property="${project.swc}.compiled"
+            targetfile="${build.compc.dir}/${project.swc}">
             <srcfiles dir="${src.flex2.dir}" includes="**/*" />
             <srcfiles dir="${uptodate.dir}" includes="${compc.lib.files}" />
         </uptodate>
@@ -189,9 +223,10 @@
         ++ Create AS3Doc files for the project
         ++ =======================================================================
     -->
-    <target name="as3doc" depends="init,as3doc-check"
-        unless="as3doc.uptodate" description="create AS3 docs">
-        <as3doc src.dir="${src.flex2.dir}" as.path="${src.flex2.dir}" dest.dir="${build.as3doc.dir}"/>
+    <target name="as3doc" depends="init,as3doc-check" unless="as3doc.uptodate"
+        description="create AS3 docs">
+        <as3doc src.dir="${src.flex2.dir}" as.path="${src.flex2.dir}"
+            dest.dir="${build.as3doc.dir}" />
     </target>
 
     <!-- up to date check for as3doc -->
@@ -201,6 +236,37 @@
         </uptodate>
     </target>
 
+    <!--
+    ++ =======================================================================
+    ++ Target: create-test-suite
+    ++ Generate arc-flexunit2 compatible AllTests AS class from flexunit tests
+    ++ =======================================================================
+    -->
+    <target name="create-test-suite"
+            depends="create-test-suite-check"
+            unless="create-test-suite.uptodate">
+        <echo message="Updating ${src.flex2.dir}/${arc-flexunit2.class}.as" />
+        <java classname="com.allurent.flexunit2.framework.AllTestsFileGenerator"
+              fork="true"
+              failonerror="true"
+              logError="true"
+              output="${src.flex2.dir}/${arc-flexunit2.class}.as">
+            <classpath>
+                <pathelement location="${arc-flexunit2.jar}"/>
+            </classpath>
+            <arg value="${src.flex2.dir}" />
+            <arg value="${arc-flexunit2.filters}" />
+        </java>
+    </target>
+    
+    <target name="create-test-suite-check">
+        <uptodate property="create-test-suite.uptodate"
+            targetfile="${src.flex2.dir}/${arc-flexunit2.class}.as">
+            <srcfiles dir="${src.flex2.dir}" includes="**/*" excludes="${arc-flexunit2.class}.as" />
+            <srcfiles file="${arc-flexunit2.filters}"/>
+        </uptodate>
+    </target>
+    
     <!--
         ++ =======================================================================
         ++ Target: test-flexunit2
@@ -212,8 +278,7 @@
         <parallel>
             <!-- Start the ReportServer and listen for results from the standalone player.    -->
             <java classname="com.allurent.flexunit2.framework.UnitTestReportServer"
-                outputproperty="server.output" fork="true"
-                resultproperty="reportserver.return.code"
+                outputproperty="server.output" fork="true" resultproperty="reportserver.return.code"
                 timeout="${arc-flexunit2.timeout}">
                 <classpath>
                     <pathelement location="${arc-flexunit2.jar}" />
@@ -248,10 +313,19 @@
         <antcall target="test-flexunit2-failure" />
     </target>
 
+    <!--
+        ++ =======================================================================
+        ++ Target: test-flexunit2-failure
+        ++ 
+        ++ Target to handle a failed flexunit test run
+        ++ It is common to override this and do additional actions if a test fails
+        ++ such as create a failure file, send email, etc.
+        ++ =======================================================================
+    -->
     <target name="test-flexunit2-failure" if="flexunit2.failed">
         <fail message="Test suite failed" />
     </target>
-    
+
     <!--
         ++ =======================================================================
         ++ Target: java-classes
@@ -259,7 +333,22 @@
         ++ Compile java files
         ++ =======================================================================
     -->
-    <target name="java-classes" depends="init">
-        <java-compile debug="${javac.debug}" />        
+    <target name="java-classes" depends="init,java-classes-copy"
+        description="Compile java classes">
+        <java-compile debug="${javac.debug}" />
+    </target>
+
+    <!--
+        ++ =======================================================================
+        ++ Target: java-classes-copy
+        ++ 
+        ++ Copies all files not part of the compile step to the destination
+        ++ directory
+        ++ =======================================================================
+    -->
+    <target name="java-classes-copy">
+        <copy todir="${build.javac.dir}">
+            <fileset dir="${src.java.dir}" includes="**/*" excludes="**/*.java" />
+        </copy>
     </target>
 </project>
