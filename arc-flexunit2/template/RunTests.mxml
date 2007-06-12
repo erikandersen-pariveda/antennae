@@ -31,7 +31,7 @@
              */
             public function runTests():void
             { 
-                ARCTestRunner.run(${arc-flexunit2.alltests.suite}, "${arc-flexunit2.reportserver.host}", ${arc-flexunit2.reportserver.port});
+                ARCTestRunner.run(@arc-flexunit2.alltests.suite@, "@arc-flexunit2.reportserver.host@", @arc-flexunit2.reportserver.port@);
             } 
         ]]>
     </mx:Script>
