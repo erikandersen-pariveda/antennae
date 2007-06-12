@@ -38,6 +38,7 @@
     -->
     <target name="init" description="Set up the project">
         <mkdir dir="${build.dir}" />
+        <mkdir dir="${build.generated.dir}" />
         <mkdir dir="${build.javac.dir}" />
         <mkdir dir="${build.compc.dir}" />
         <mkdir dir="${build.mxmlc.dir}" />
@@ -109,6 +110,7 @@
         <delete dir="${build.mxmlc.dir}" quiet="true" />
         <delete dir="${build.compc.dir}" quiet="true" />
         <delete dir="${build.javac.dir}" quiet="true" />
+        <delete dir="${build.generated.dir}" quiet="true" />
         <delete dir="${build.dir}" quiet="true" />
     </target>
 
@@ -181,6 +183,7 @@
         <uptodate property="${project.swf}.compiled"
             targetfile="${build.mxmlc.dir}/${project.swf}">
             <srcfiles dir="${src.flex2.dir}" includes="**/*" />
+            <srcfiles dir="${build.generated.dir}" includes="**/*" />
             <srcfiles dir="${uptodate.dir}" includes="${mxmlc.lib.files}" />
         </uptodate>
     </target>
@@ -237,36 +240,60 @@
     </target>
 
     <!--
-    ++ =======================================================================
-    ++ Target: create-test-suite
-    ++ Generate arc-flexunit2 compatible AllTests AS class from flexunit tests
-    ++ =======================================================================
+        ++ =======================================================================
+        ++ Target: flex2-test-application
+        ++ 
+        ++ Build a Flex test application, including the copying of non-compiled
+        ++ resources.
+        ++ =======================================================================
     -->
-    <target name="create-test-suite"
-            depends="create-test-suite-check"
-            unless="create-test-suite.uptodate">
-        <echo message="Updating ${src.flex2.dir}/${arc-flexunit2.class}.as" />
-        <java classname="com.allurent.flexunit2.framework.AllTestsFileGenerator"
-              fork="true"
-              failonerror="true"
-              logError="true"
-              output="${src.flex2.dir}/${arc-flexunit2.class}.as">
+    <target name="flex2-test-application"
+        depends="init,create-test-suite,flex2-application-check,flex2-application-copy"
+        unless="${project.swf}.compiled" description="Compile the application">
+        <mxmlc src="${build.generated.dir}/${project.flex2.application}"
+            dest="${build.mxmlc.dir}/${project.swf}"
+            options="-verbose-stacktraces=true ${flex2.mxmlc.options}" />
+    </target>
+
+    <!--
+        ++ =======================================================================
+        ++ Target: create-test-suite
+        ++ Generate arc-flexunit2 compatible AllTests AS class from flexunit tests
+        ++ =======================================================================
+    -->
+    <target name="create-test-suite" depends="init,create-test-suite-check"
+        unless="create-test-suite.uptodate">
+        <echo message="Updating ${build.generated.dir}/${arc-flexunit2.class}.as" />
+        <java classname="com.allurent.flexunit2.framework.AllTestsFileGenerator" fork="true"
+            failonerror="true" logError="true"
+            output="${build.generated.dir}/${arc-flexunit2.class}.as">
             <classpath>
-                <pathelement location="${arc-flexunit2.jar}"/>
+                <pathelement location="${arc-flexunit2.jar}" />
             </classpath>
             <arg value="${src.flex2.dir}" />
             <arg value="${arc-flexunit2.filters}" />
         </java>
+        <copy file="${arc-flexunit2.mxml}"
+            tofile="${build.generated.dir}/${project.flex2.application}">
+            <filterset>
+                <filter token="arc-flexunit2.alltests.suite"
+                    value="${arc-flexunit2.alltests.suite}" />
+                <filter token="arc-flexunit2.reportserver.host"
+                    value="${arc-flexunit2.reportserver.host}" />
+                <filter token="arc-flexunit2.reportserver.port"
+                    value="${arc-flexunit2.reportserver.port}" />
+            </filterset>
+        </copy>
     </target>
-    
+
     <target name="create-test-suite-check">
         <uptodate property="create-test-suite.uptodate"
-            targetfile="${src.flex2.dir}/${arc-flexunit2.class}.as">
-            <srcfiles dir="${src.flex2.dir}" includes="**/*" excludes="${arc-flexunit2.class}.as" />
-            <srcfiles file="${arc-flexunit2.filters}"/>
+            targetfile="${build.generated.dir}/${arc-flexunit2.class}.as">
+            <srcfiles dir="${src.flex2.dir}" />
+            <srcfiles file="${arc-flexunit2.filters}" />
         </uptodate>
     </target>
-    
+
     <!--
         ++ =======================================================================
         ++ Target: test-flexunit2
@@ -275,6 +302,19 @@
         ++ =======================================================================
     -->
     <target name="test-flexunit2" depends="init">
+        <!-- In order to use the Standalone player from the command line on a Mac
+            it needs to be launched using the open command. These next three checks
+            setup the needed branching to make it work. -->
+        <condition property="test.flexunit2.exec" value="/usr/bin/open"
+            else="${flex2.standalone.player}">
+            <os family="mac" />
+        </condition>
+        <condition property="test.flexunit2.opt1" value="-a" else="">
+            <os family="mac" />
+        </condition>
+        <condition property="test.flexunit2.opt2" value="${flex2.standalone.player}" else="">
+            <os family="mac" />
+        </condition>
         <parallel>
             <!-- Start the ReportServer and listen for results from the standalone player.    -->
             <java classname="com.allurent.flexunit2.framework.UnitTestReportServer"
@@ -291,9 +331,11 @@
             <sequential>
                 <!-- Need to wait a couple of seconds to avoid a race condition in Ant -->
                 <sleep seconds="2" />
-                <exec executable="${flex2.standalone.player}" dir="${basedir}/${build.mxmlc.dir}"
+                <exec executable="${test.flexunit2.exec}" dir="${basedir}/${build.mxmlc.dir}"
                     failonerror="false" resultproperty="flashplayer.return.code"
                     timeout="${arc-flexunit2.timeout}" vmlauncher="true">
+                    <arg value="${test.flexunit2.opt1}" />
+                    <arg value="${test.flexunit2.opt2}" />
                     <arg value="${project.swf}" />
                     <env key="DISPLAY" value="${environment.display}" />
                 </exec>

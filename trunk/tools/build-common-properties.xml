@@ -34,8 +34,9 @@
 
     <!-- build properties -->
     <property name="build.dir" value="build" />
-    <property name="build.stage.dir" value="build/stage" />
-    <property name="build.dist.dir" value="build/dist" />
+    <property name="build.generated.dir" value="${build.dir}/generated" />
+    <property name="build.stage.dir" value="${build.dir}/stage" />
+    <property name="build.dist.dir" value="${build.dir}/dist" />
     <!-- the base directory which all assets fall under, see flex2-* targets -->
     <property name="uptodate.dir" location="${tools.properties.dir}/.." />
 
@@ -70,5 +71,5 @@
     <!-- javac properties -->
     <property name="javac.debug" value="true" />
     <property name="src.java.dir" value="java" />
-    <property name="build.javac.dir" value="build/classes" />
+    <property name="build.javac.dir" value="${build.dir}/classes" />
 </project>
