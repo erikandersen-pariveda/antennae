@@ -106,8 +106,11 @@ build.xml
 	Each project that requires or aggregates build information specifies a build.xml
 	file. Each build.xml file in Antennae follows the same basic structure:
 	project properties, imports, target overrides, custom targets.
-	It will probably be helpful to have both examples/build*.xml and
-	examples/app2/build*.xml as references when reading the rest of this section.
+	It will probably be helpful to have both tutorial/build*.xml and
+	tutorial/app2/build*.xml as references when reading the rest of this section.
+
+	Each build.xml file has a name attribute defined at the top in the project element
+	that needs to be unique. This allows referring to targets defined in other files.
 	
 project properties
 	The shared build logic relies on an individual project to define pieces that
@@ -151,6 +154,10 @@ imports
 	you might have a .swc that is used by two other projects. The location of that
 	.swc would be captured in a build-assets.xml file that when pulled in would
 	allow other projects to reference the exported property.
+	
+	Each build-imports.xml and build-assets.xml file has a name attribute defined at
+	the top in the project element that needs to be unique. This allows referring to
+	targets defined in other files.
 	
 target overrides
 	Antennae defines a set of top level build targets that represent the standard
