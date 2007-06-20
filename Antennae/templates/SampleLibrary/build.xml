@@ -1,13 +1,14 @@
 <project name="SampleLibrary" default="build">
     <!-- Project specific overrides -->
+    <property name="root.dir" location="../../"/>
 
     <!-- Shared properties -->
-    <property file="../../build-user.properties" />
+    <property file="${root.dir}/build-user.properties" />
 
     <!-- Common properties and targets -->
-    <import file="../../tools/build-common-properties.xml" />
-    <import file="../../tools/build-common-tasks.xml" />
-    <import file="../../tools/build-common-targets.xml" />
+    <import file="${root.dir}/tools/build-common-properties.xml" />
+    <import file="${root.dir}/tools/build-common-tasks.xml" />
+    <import file="${root.dir}/tools/build-common-targets.xml" />
 
     <!-- Build path -->
     <path id="flex2.lib.path"/>

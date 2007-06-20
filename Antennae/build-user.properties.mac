@@ -18,4 +18,4 @@ tomcat.webapps.dir=/Applications/Tomcat-6.0.10/webapps
 #
 # location of stand alone debug player
 #
-flex2.standalone.player=/Applications/Adobe Flex Builder Moxie Plug-in/Player/debug/SAFlashPlayer.app/Contents/MacOS/standalone
+flex2.standalone.player=/Applications/Flex/2.0.1 HF1/player/debug/SAFlashPlayer.app/Contents/MacOS/standalone

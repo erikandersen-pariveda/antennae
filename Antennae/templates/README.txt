@@ -26,8 +26,7 @@ This directory contains skeleton projects that can be used to
 jump start using Antennae. The steps are:
 
 1) Make a copy of the desired folder
-2) Adjust the paths and project names in the build.xml files
-3) Create a sub-directory called flex2 and add your source code
+2) Adjust the source and project names in the build.xml files
 
 SampleApplication is for creating a Flex Application (.swf).
 
@@ -36,3 +35,5 @@ SampleLibrary is for creating a Flex Library (.swc).
 SampleProject is for creating a project that includes both a Flex Library
 	and a Flex Application, to demonstrate inter project dependencies.
 
+SampleTestApplication is for creating a FlexUnit Application.
+	This includes automatic TestSuite generation and command line execution.

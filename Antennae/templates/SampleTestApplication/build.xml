@@ -1,0 +1,23 @@
+<project name="SampleTestApplication" default="test">
+    <!-- Project specific overrides -->
+    <property name="root.dir" location="../../"/>
+
+    <!-- Shared properties -->
+    <property file="${root.dir}/build-user.properties" />
+
+    <!-- Common properties and targets -->
+    <import file="${root.dir}/tools/build-common-properties.xml" />
+    <import file="${root.dir}/tools/build-common-tasks.xml" />
+    <import file="${root.dir}/tools/build-common-targets.xml" />
+    <import file="${root.dir}/lib/build-assets.xml" />
+
+    <!-- Build path -->
+    <path id="flex2.lib.path">
+        <pathelement location="${flexunit2.swc}"/>
+        <pathelement location="${arc-flexunit2.swc}"/>
+    </path>
+
+    <!-- Project specific targets -->
+    <target name="build" depends="init,flex2-test-application" description="Build the test application"/>
+    <target name="test" depends="build,test-flexunit2" description="Run the test application"/>
+</project>

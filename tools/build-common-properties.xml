@@ -72,4 +72,7 @@
     <property name="javac.debug" value="true" />
     <property name="src.java.dir" value="java" />
     <property name="build.javac.dir" value="${build.dir}/classes" />
+    
+    <!-- misc properties -->
+    <property name="mac.open" value="/usr/bin/open" />
 </project>

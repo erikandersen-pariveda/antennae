@@ -302,10 +302,12 @@
         ++ =======================================================================
     -->
     <target name="test-flexunit2" depends="init">
-        <!-- In order to use the Standalone player from the command line on a Mac
+        <!--
+        	In order to use the Standalone player from the command line on a Mac
             it needs to be launched using the open command. These next three checks
-            setup the needed branching to make it work. -->
-        <condition property="test.flexunit2.exec" value="/usr/bin/open"
+            setup the needed branching to make it work.
+        -->
+        <condition property="test.flexunit2.exec" value="${mac.open}"
             else="${flex2.standalone.player}">
             <os family="mac" />
         </condition>
