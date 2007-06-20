@@ -29,6 +29,11 @@ illustrate the use of Ant with Flex, based on some simple "toy"
 projects.  It does not assume any existing knowledge of Ant, but
 does assume the user has access to Ant reference materials.
 
+Tools are provided to automate the running of FlexUnit tests.
+
+Additionally a set of quick start templates is provided to make
+it easy to get new projects up and running quickly.
+
 * REQUIREMENTS
 
 Ant 1.6.5 or newer is required (along with an Ant compatible JDK):
@@ -40,24 +45,24 @@ http://www.flex.org/
 * INSTALLATION
 
 Unpack the Antennae.zip directory into a location of your choice.
-See the notes about custom *.build-user.properties below in the CONTENTS
+See the notes about custom build-user.properties below in the CONTENTS
 section.
 
 * CONTENTS
 
 build.xml
 	Top level build file that can be used to execute the standard
-	targets on all projects in Antennae.
+	targets on all sample projects in Antennae.
 	
 build-imports.xml
-	Top level import file that specified where the common Ant files
-	are located and pulls in all of the build-asset files.
+	Top level import file that specifies where the common Ant files
+	are located and pulls in all of the build-asset.xml files.
 	
 build-assets.xml
-	Top level build asset file that specified the location of all
-	other build-assets files that should be referenced by Ant.
+	Top level build asset file that specifies the location of all
+	other build-assets.xml files that should be referenced by Ant.
 
-*.build-user.properties
+build-user.properties.*
 	Sample build-user.properties files. Based on your system configuration
 	you might want to copy one of these files to build-user.properties
 	and customize it to your system.
