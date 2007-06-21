@@ -34,6 +34,11 @@ Tools are provided to automate the running of FlexUnit tests.
 Additionally a set of quick start templates is provided to make it
 easy to get new projects up and running quickly.
 
+For the latest information, bug reporting, and enhancement requests,
+please see:
+
+http://code.google.com/p/antennae/
+
 * REQUIREMENTS
 
 Ant 1.6.5 or newer is required (along with an Ant compatible JDK):

@@ -1,6 +1,0 @@
-Add targets, tutorial, and template for automatic test suite creation using arc-flexunit2
-Additional documentation
-
-Add documentation about additional customization tasks
-
-Add documentation about working with Eclipse
