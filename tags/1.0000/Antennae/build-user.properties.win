@@ -1,0 +1,21 @@
+#
+# build-user.properties: A user-specific file in which to define specific
+#                        locations that may vary from machine to machine.
+#
+
+# below is a sample for Windows of properties that usually change
+
+#
+# location of Flex SDK (if SDK is under version control, don't define this here)
+#
+flex2.dir=C:/Program Files/Adobe/Flex Builder 2 Plug-in/Flex SDK 2
+
+#
+# location of Tomcat webapps directory
+#
+tomcat.webapps.dir=C:/Java/apache-tomcat-6.0.10/webapps
+
+#
+# location of stand alone debug player
+#
+flex2.standalone.player=C:/Program Files/Adobe/Flex Builder 2 Plug-in/Player/debug/SAFlashPlayer.exe

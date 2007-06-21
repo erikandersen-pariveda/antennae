@@ -1,0 +1,14 @@
+<project name="arc-flexunit2" default="stage">
+    <import file="build-imports.xml" />
+
+    <path id="flex2.lib.path">
+        <pathelement location="${flexunit2.swc}" />
+    </path>
+    <path id="javac.lib.path" />
+
+    <target name="build" depends="java-classes,flex2-library,build.internal" />
+
+	<target name="build.internal">
+        <jar destfile="${build.stage.dir}/${project.jar}" basedir="${build.javac.dir}" />
+	</target>
+</project>

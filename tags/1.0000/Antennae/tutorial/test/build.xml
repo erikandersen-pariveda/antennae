@@ -1,0 +1,12 @@
+<project name="Test" default="build">
+    <import file="build-imports.xml"/>
+
+    <path id="flex2.lib.path">
+        <pathelement location="${flexunit2.swc}"/>
+        <pathelement location="${arc-flexunit2.swc}"/>
+    </path>
+
+    <!-- targets -->
+    <target name="build" depends="init,flex2-test-application" description="Build the test application"/>
+    <target name="test" depends="build,test-flexunit2" description="Run the test application"/>
+</project>
