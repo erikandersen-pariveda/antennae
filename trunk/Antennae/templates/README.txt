@@ -22,18 +22,21 @@
 # WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 ################################################################
 
-This directory contains skeleton projects that can be used to
-jump start using Antennae. The steps are:
+This directory contains skeleton projects that can be used to jump
+start using Antennae. The steps are:
 
 1) Make a copy of the desired folder
-2) Adjust the source and project names in the build.xml files
+
+2) Adjust the source code and project names in the build.xml files
 
 SampleApplication is for creating a Flex Application (.swf).
 
 SampleLibrary is for creating a Flex Library (.swc).
 
-SampleProject is for creating a project that includes both a Flex Library
-	and a Flex Application, to demonstrate inter project dependencies.
+SampleProject is for creating a project that includes both a Flex
+	Library and a Flex Application, to demonstrate inter project
+	dependencies.
 
-SampleTestApplication is for creating a FlexUnit Application.
-	This includes automatic TestSuite generation and command line execution.
+SampleTestApplication is for creating a FlexUnit Application. This
+	includes automatic TestSuite generation and command line
+	execution.
