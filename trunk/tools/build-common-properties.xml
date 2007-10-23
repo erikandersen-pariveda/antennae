@@ -28,6 +28,8 @@
     <property name="project.name" value="${ant.project.name}" />
     <property name="project.swf" value="${project.name}.swf" />
     <property name="project.swc" value="${project.name}.swc" />
+    <property name="project.air" value="${project.name}.air" />
+    <property name="project.air.desc" value="${project.name}-app.xml" />
     <property name="project.flex2.application" value="${project.name}.mxml" />
     <property name="project.jar" value="${project.name}.jar" />
     <property name="project.war" value="${project.name}.war" />
@@ -52,6 +54,18 @@
     <property name="src.flex2.dir" value="flex2" />
     <property name="build.compc.dir" value="${build.dir}/swc/" />
     <property name="build.mxmlc.dir" value="${build.dir}/swf/" />
+    <!-- defined in build-user.properties -->
+    <!-- flex2.standalone.player -->
+
+    <!-- air properties -->        
+    <property name="air.config" value="${flex2.frameworks.dir}/air-config.xml" />
+    <property name="air.adt.jar" value="${flex2.dist.lib}/adt.jar" />
+    <property name="src.assets.dir" value="assets" />
+    <property name="build.assets.dir" value="${build.stage.dir}/assets" />
+    <!-- defined in build-user.properties -->
+    <!-- air.adl -->
+    <!-- air.certificate -->
+    <!-- air.certificate.password -->
 
     <!-- as3doc properties -->
     <property name="as3doc.template.dir" value="${flex2.dir}/asdoc/templates" />
