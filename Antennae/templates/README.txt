@@ -40,3 +40,5 @@ SampleProject is for creating a project that includes both a Flex
 SampleTestApplication is for creating a FlexUnit Application. This
 	includes automatic TestSuite generation and command line
 	execution.
+
+SampleAIRApplication is for creating a Flex based AIR Application (.air)

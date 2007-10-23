@@ -49,9 +49,10 @@ http://www.flex.org/
 
 * INSTALLATION
 
-Unpack the Antennae.zip directory into a location of your choice.  See
-the notes about custom build-user.properties below in the CONTENTS
-section.
+Unpack the Antennae.zip directory into a location of your choice.
+
+Create a custom build-user.properties (see below in the CONTENTS
+section).
 
 * CONTENTS
 
@@ -197,7 +198,6 @@ target overrides
 	represent the standard steps of building software. These are:
 	init, build, test, stage, dist, deploy, clean, and
 	undeploy. They are described below:
-	
 
 	init: Used to setup the directories needed for all the other
 	targets

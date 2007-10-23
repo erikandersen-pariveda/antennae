@@ -13,9 +13,27 @@ flex2.dir=/Applications/Flex/2.0.1 HF1
 #
 # location of Tomcat webapps directory
 #
-tomcat.webapps.dir=/Applications/Tomcat-6.0.10/webapps
+tomcat.webapps.dir=/Applications/Tomcat-6.0.14/webapps
 
 #
 # location of stand alone debug player
 #
 flex2.standalone.player=/Applications/Flex/2.0.1 HF1/player/debug/SAFlashPlayer.app/Contents/MacOS/standalone
+
+#
+# location of the AIR adl executable
+#
+air.adl=${flex2.dir}/bin/adl
+
+#
+# location of the AIR certificate file
+# See the following URL for information on "Creating a self-signed certificate with ADT"
+# http://livedocs.adobe.com/labs/air/1/devappshtml/CommandLineTools_4.html#1034775
+#
+air.certificate=/Users/danielr/Documents/certificate.pfx
+
+#
+# by default you will be prompted for the certificate password
+# to avoid this, uncomment the line below
+#
+# air.certificate.password=password
