@@ -24,6 +24,19 @@
 <project name="tools.properties">
     <dirname property="tools.properties.dir" file="${ant.file.tools.properties}" />
 
+    <!--
+        Instead of modifying properties in this file it is recommended that:
+
+        1) Make all modification in a build-user.properties file in the directory above
+           This is handy for developer specific settings
+
+        2) Create an override file that build-common-imports.xml includes ahead
+           of the standard build-common-properties.
+
+        Either of these approaches will allow updating the Antennae templates without
+        requiring the merge of localized changes into the distributed files.
+    --> 
+    
     <!-- derived project properties -->
     <property name="project.name" value="${ant.project.name}" />
     <property name="project.swf" value="${project.name}.swf" />
@@ -60,10 +73,15 @@
     <!-- air properties -->        
     <property name="air.config" value="${flex2.frameworks.dir}/air-config.xml" />
     <property name="air.adt.jar" value="${flex2.dist.lib}/adt.jar" />
+    <condition property="air.adl"
+               value="${flex2.dir}/bin/adl.exe"
+               else="${flex2.dir}/bin/adl">
+        <os family="windows" />
+    </condition>
     <property name="src.assets.dir" value="assets" />
     <property name="build.assets.dir" value="${build.stage.dir}/assets" />
+
     <!-- defined in build-user.properties -->
-    <!-- air.adl -->
     <!-- air.certificate -->
     <!-- air.certificate.password -->
 

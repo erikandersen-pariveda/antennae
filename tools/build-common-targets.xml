@@ -404,23 +404,27 @@
         ++ Run Flexunit2 tests
         ++ =======================================================================
     -->
-    <target name="test-flexunit2" depends="init">
-        <!--
-            In order to use the Standalone player from the command line on a Mac
-            it needs to be launched using the open command. These next three checks
-            setup the needed branching to make it work.
-        -->
-        <condition property="test.flexunit2.exec"
-                   value="${mac.open}"
-                   else="${flex2.standalone.player}">
+    <target name="test-flexunit2" depends="init,test-flexunit2-os,test-flexunit2-mac,test-flexunit2-notmac">
+        <echo message="${server.output}" />
+
+        <condition property="flexunit2.failed">
+            <not>
+                <and>
+                    <equals arg1="0" arg2="${reportserver.return.code}" />
+                    <equals arg1="0" arg2="${flashplayer.return.code}" />
+                </and>
+            </not>
+        </condition>
+        <antcall target="test-flexunit2-failure" />
+    </target>
+
+    <target name="test-flexunit2-os">
+        <condition property="test.flexunit2.mac" value="true">
             <os family="mac" />
         </condition>
-        <condition property="test.flexunit2.opt1" value="-a" else="">
-            <os family="mac" />
-        </condition>
-        <condition property="test.flexunit2.opt2" value="${flex2.standalone.player}" else="">
-            <os family="mac" />
-        </condition>
+    </target>
+    
+    <target name="test-flexunit2-mac" if="test.flexunit2.mac">
         <parallel>
             <!-- Start the ReportServer and listen for results from the standalone player.    -->
             <java classname="com.allurent.flexunit2.framework.UnitTestReportServer"
@@ -439,31 +443,55 @@
             <sequential>
                 <!-- Need to wait a couple of seconds to avoid a race condition in Ant -->
                 <sleep seconds="2" />
-                <exec executable="${test.flexunit2.exec}"
+                <!--
+                    In order to use the Standalone player from the command line on a Mac
+                    it needs to be launched using the open command.
+                -->
+                <exec executable="${mac.open}"
                       dir="${basedir}/${build.mxmlc.dir}"
                       failonerror="false"
                       resultproperty="flashplayer.return.code"
                       timeout="${arc-flexunit2.timeout}"
                       vmlauncher="true">
-                    <arg value="${test.flexunit2.opt1}" />
-                    <arg value="${test.flexunit2.opt2}" />
+                    <arg value="-a" />
+                    <arg value="${flex2.standalone.player}" />
                     <arg value="${project.swf}" />
                     <env key="DISPLAY" value="${environment.display}" />
                 </exec>
             </sequential>
         </parallel>
+    </target>
 
-        <echo message="${server.output}" />
+    <target name="test-flexunit2-notmac" unless="test.flexunit2.mac">
+        <parallel>
+            <!-- Start the ReportServer and listen for results from the standalone player.    -->
+            <java classname="com.allurent.flexunit2.framework.UnitTestReportServer"
+                  outputproperty="server.output"
+                  fork="true"
+                  resultproperty="reportserver.return.code"
+                  timeout="${arc-flexunit2.timeout}">
+                <classpath>
+                    <pathelement location="${arc-flexunit2.jar}" />
+                </classpath>
 
-        <condition property="flexunit2.failed">
-            <not>
-                <and>
-                    <equals arg1="0" arg2="${reportserver.return.code}" />
-                    <equals arg1="0" arg2="${flashplayer.return.code}" />
-                </and>
-            </not>
-        </condition>
-        <antcall target="test-flexunit2-failure" />
+                <arg value="${arc-flexunit2.reportserver.port}" />
+            </java>
+
+            <!-- Start the standalone player with the swf.  Tests execute when the standalone player loads the swf. -->
+            <sequential>
+                <!-- Need to wait a couple of seconds to avoid a race condition in Ant -->
+                <sleep seconds="2" />
+                <exec executable="${flex2.standalone.player}"
+                      dir="${basedir}/${build.mxmlc.dir}"
+                      failonerror="false"
+                      resultproperty="flashplayer.return.code"
+                      timeout="${arc-flexunit2.timeout}"
+                      vmlauncher="true">
+                    <arg value="${project.swf}" />
+                    <env key="DISPLAY" value="${environment.display}" />
+                </exec>
+            </sequential>
+        </parallel>
     </target>
 
     <!--
