@@ -8,6 +8,10 @@
 
     <target name="build" depends="java-classes,flex2-library,build.internal" />
 
+    <target name="java-classes" depends="init,java-classes-copy">
+        <javac srcdir="${src.java.dir}" destdir="${build.javac.dir}" debug="${javac.debug}" source="1.2" target="1.1"/>
+    </target>
+    
 	<target name="build.internal">
         <jar destfile="${build.stage.dir}/${project.jar}" basedir="${build.javac.dir}" />
 	</target>

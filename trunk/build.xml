@@ -53,6 +53,10 @@
                 <exclude name="**/build/"/>
                 <exclude name="**/build-user.properties"/>
             </zipfileset>
+            <zipfileset dir="arc-flexunit2" prefix="Antennae/src/arc-flexunit2">
+                <include name="**/flex2/"/>
+                <include name="**/java/"/>
+            </zipfileset>
         </zip>
     </target>
 
