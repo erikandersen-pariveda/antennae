@@ -8,9 +8,9 @@
             <arg value="+flexlib=c:/flex/flex2.0.1/sdk/frameworks" />
 
             <!-- find associated sources in the flex2 directory -->
-            <arg value="-source-path=flex2" />
-            <arg value="-file-specs=flex2/Main.mxml" />
-            <arg value="-output=build/Main.swf" />
+            <arg value="-source-path=src" />
+            <arg value="-file-specs=src/Main.mxml" />
+            <arg value="-output=bin/Main.swf" />
         </java>
     </target>
 </project>

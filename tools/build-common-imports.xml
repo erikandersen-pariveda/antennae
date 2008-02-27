@@ -1,5 +1,5 @@
 <!--
-    Copyright (c) 2007 Allurent, Inc.
+    Copyright (c) 2007-2008 Allurent, Inc.
     http://code.google.com/p/antennae/
     
     Permission is hereby granted, free of charge, to any person obtaining
@@ -22,6 +22,19 @@
     WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 -->
 <project name="tools.imports">
+    <!--
+        Uncomment the next line to trigger the backwards compatible mappings
+        for properties, targets, and tasks most likely to break as a result
+        of the naming changes introduced in Antennae as of 1.2.0.
+
+        For additional details see the comments in build-common-imports.xml.
+
+        This mechanism should be considered depreciated and will be removed
+        in a future release of Antennae.
+    -->
+    <!--
+        <import file="compat-build.xml" />
+    -->
     <import file="build-common-properties.xml" />
     <import file="build-common-tasks.xml" />
     <import file="build-common-targets.xml" />

@@ -1,0 +1,67 @@
+<!--
+    Copyright (c) 2007-2008 Allurent, Inc.
+    http://code.google.com/p/antennae/
+    
+    Permission is hereby granted, free of charge, to any person obtaining
+    a copy of this software and associated documentation files (the
+    "Software"), to deal in the Software without restriction, including
+    without limitation the rights to use, copy, modify, merge, publish,
+    distribute, sublicense, and/or sell copies of the Software, and to
+    permit persons to whom the Software is furnished to do so, subject to
+    the following conditions:
+    
+    The above copyright notice and this permission notice shall be
+    included in all copies or substantial portions of the Software.
+    
+    THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
+    EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
+    MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
+    NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE
+    LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION
+    OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION
+    WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
+-->
+<project name="tools.compat">
+    <dirname property="tools.compat.dir" file="${ant.file.tools.compat}" />
+
+    <!--
+        This file provides backwards compatible mappings for properties, targets,
+        and tasks most likely to break as a result of the naming changes
+        introduced in Antennae as of 1.2.0.
+        
+        To use this file see the comments in build-common-imports.xml.
+        
+        This mechanism should be considered depreciated and will be removed
+        in a future release of Antennae.  
+    -->
+
+    <condition property="project.flex.application" value="${project.flex2.application}">
+        <isset property="project.flex2.application" />
+    </condition>
+
+    <condition property="flex.dir" value="${flex2.dir}">
+        <isset property="flex2.dir" />
+    </condition>
+
+    <condition property="src.flex.dir" value="${src.flex2.dir}" else="flex2">
+        <isset property="src.flex2.dir" />
+    </condition>
+
+    <condition property="flex.standalone.player" value="${flex2.standalone.player}">
+        <isset property="flex2.standalone.player" />
+    </condition>
+
+    <target name="flex2-application" depends="flex-application" />
+
+    <target name="flex2-library" depends="flex-library" />
+    <target name="as3doc" depends="asdoc" />
+    <target name="flex2-test-application" depends="flex-test-application" />
+    <target name="test-flexunit2" depends="test-flexunit" />
+
+    <target name="" depends="" />
+    <target name="" depends="" />
+    <target name="" depends="" />
+
+
+</project>
+
