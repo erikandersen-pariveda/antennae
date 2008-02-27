@@ -1,10 +1,10 @@
-<project name="arc-flexunit2.assets">
-    <dirname property="arc-flexunit2.assets.dir" file="${ant.file.arc-flexunit2.assets}"/>
+<project name="arc-flexunit.assets">
+    <dirname property="arc-flexunit.assets.dir" file="${ant.file.arc-flexunit.assets}"/>
 
-    <property name="arc-flexunit2.mxml"
-        location="${arc-flexunit2.assets.dir}/template/RunTests.mxml" />
-    <property name="arc-flexunit2.swc"
-        location="${arc-flexunit2.assets.dir}/${build.compc.dir}/arc-flexunit2.swc" />
-    <property name="arc-flexunit2.jar"
-        location="${arc-flexunit2.assets.dir}/${build.stage.dir}/arc-flexunit2.jar" />
+    <property name="arc-flexunit.mxml"
+        location="${arc-flexunit.assets.dir}/template/RunTests.mxml" />
+    <property name="arc-flexunit.swc"
+        location="${arc-flexunit.assets.dir}/${build.compc.dir}/arc-flexunit.swc" />
+    <property name="arc-flexunit.jar"
+        location="${arc-flexunit.assets.dir}/${build.stage.dir}/arc-flexunit.jar" />
 </project>

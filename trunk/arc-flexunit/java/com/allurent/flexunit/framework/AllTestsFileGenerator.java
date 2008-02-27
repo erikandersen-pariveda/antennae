@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2007 Allurent, Inc.
+ * Copyright (c) 2007-2008 Allurent, Inc.
  * http://code.google.com/p/antennae/
  *
  * Permission is hereby granted, free of charge, to any person obtaining
@@ -21,7 +21,7 @@
  * OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION
  * WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  */
-package com.allurent.flexunit2.framework;
+package com.allurent.flexunit.framework;
 
 import java.io.File;
 import java.io.FileFilter;
@@ -166,7 +166,7 @@ public class AllTestsFileGenerator
     private static void usage()
     {
         System.out
-                .println("\nAllTestsFileGenerator : Generates an arc-flexunit2 compatible \"AllTests\" ActionScript class based on test classes in a source directory.");
+                .println("\nAllTestsFileGenerator : Generates an arc-flexunit compatible \"AllTests\" ActionScript class based on test classes in a source directory.");
         System.out.println("By default any class named Test*.as or *Test.as will be included.");
         System.out.println("Usage:\n AllTestsFileGenerator <source_dir> [filters_file]\n");
     }

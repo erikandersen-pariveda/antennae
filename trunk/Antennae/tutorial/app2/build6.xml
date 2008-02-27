@@ -3,11 +3,11 @@
     <!-- project specific properties -->
     <property name="project.name" value="Main" />
 
-    <path id="flex2.lib.path"/>
+    <path id="flex.lib.path"/>
 
     <!-- pull in shared information -->
     <import file="build-imports.xml" />
 
     <!-- project specific targets -->
-    <target name="build" depends="init,flex2-application" description="Build the application" />
+    <target name="build" depends="init,flex-application" description="Build the application" />
 </project>

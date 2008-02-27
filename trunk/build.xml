@@ -8,7 +8,7 @@
     <property name="antennae.tools.dir" location="${antennae.dir}/tools"/>
     
     <filelist id="children.filelist" dir=".">
-        <file name="arc-flexunit2"/>
+        <file name="arc-flexunit"/>
     </filelist>
     
     <target name="init">
@@ -26,9 +26,9 @@
     </target>
 
     <target name="stage.internal" depends="init.internal">
-        <copy file="${arc-flexunit2.swc}" todir="${antennae.lib.dir}"/>
-        <copy file="${arc-flexunit2.jar}" todir="${antennae.lib.dir}"/>
-        <copy file="${arc-flexunit2.mxml}" todir="${antennae.lib.dir}"/>
+        <copy file="${arc-flexunit.swc}" todir="${antennae.lib.dir}"/>
+        <copy file="${arc-flexunit.jar}" todir="${antennae.lib.dir}"/>
+        <copy file="${arc-flexunit.mxml}" todir="${antennae.lib.dir}"/>
         <copy todir="${antennae.lib.dir}">
             <fileset dir="lib">
                 <exclude name="build-assets.xml"/>
@@ -48,13 +48,13 @@
 
     <target name="dist.internal" depends="stage.internal">
         <property file="version.properties" />
-        <zip destfile="${build.dist.dir}/Antennae-${major}.${minor}.zip">
+        <zip destfile="${build.dist.dir}/Antennae-${major}.${minor}.${patch}.zip">
             <zipfileset dir="${antennae.dir}" prefix="Antennae">
                 <exclude name="**/build/"/>
                 <exclude name="**/build-user.properties"/>
             </zipfileset>
-            <zipfileset dir="arc-flexunit2" prefix="Antennae/src/arc-flexunit2">
-                <include name="**/flex2/"/>
+            <zipfileset dir="arc-flexunit" prefix="Antennae/src/arc-flexunit">
+                <include name="**/flex/"/>
                 <include name="**/java/"/>
             </zipfileset>
         </zip>
@@ -73,12 +73,5 @@
             </fileset>
         </delete>
         <delete file="${antennae.dir}/build-user.properties"/>
-    </target>
-    
-    <!-- Increments the minor version of the system -->
-    <target name="update-version">
-        <propertyfile file="version.properties">
-            <entry key="minor" type="int" default="0000" operation="+" pattern="0000" />
-        </propertyfile>
     </target>
 </project>

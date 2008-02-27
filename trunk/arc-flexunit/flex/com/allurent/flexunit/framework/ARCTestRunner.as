@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2007 Allurent, Inc.
+ * Copyright (c) 2007-2008 Allurent, Inc.
  * http://code.google.com/p/antennae/
  *
  * Permission is hereby granted, free of charge, to any person obtaining
@@ -21,7 +21,7 @@
  * OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION
  * WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  */
-package com.allurent.flexunit2.framework
+package com.allurent.flexunit.framework
 {
     import flexunit.flexui.TestRunner;
     import flexunit.framework.Test;

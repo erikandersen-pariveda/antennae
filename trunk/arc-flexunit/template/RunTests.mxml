@@ -1,5 +1,5 @@
 <!--
-    Copyright (c) 2007 Allurent, Inc.
+    Copyright (c) 2007-2008 Allurent, Inc.
     http://code.google.com/p/antennae/
     
     Permission is hereby granted, free of charge, to any person obtaining
@@ -24,14 +24,14 @@
 <mx:Application xmlns:mx="http://www.adobe.com/2006/mxml" backgroundColor="white" creationComplete="runTests();">
     <mx:Script>
         <![CDATA[
-            import com.allurent.flexunit2.framework.ARCTestRunner;
+            import com.allurent.flexunit.framework.ARCTestRunner;
     
             /**
              * Kick off the tests.
              */
             public function runTests():void
             { 
-                ARCTestRunner.run(@arc-flexunit2.alltests.suite@, "@arc-flexunit2.reportserver.host@", @arc-flexunit2.reportserver.port@);
+                ARCTestRunner.run(@arc-flexunit.alltests.suite@, "@arc-flexunit.reportserver.host@", @arc-flexunit.reportserver.port@);
             } 
         ]]>
     </mx:Script>

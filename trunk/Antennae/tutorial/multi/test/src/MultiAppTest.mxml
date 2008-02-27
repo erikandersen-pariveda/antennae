@@ -5,7 +5,7 @@
 
     <mx:Script>
         <![CDATA[
-        import com.allurent.flexunit2.framework.ARCTestRunner;
+        import com.allurent.flexunit.framework.ARCTestRunner;
 
         public function runAutomatedTest():void
         { 

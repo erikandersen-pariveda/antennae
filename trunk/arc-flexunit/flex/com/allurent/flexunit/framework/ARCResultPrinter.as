@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2007 Allurent, Inc.
+ * Copyright (c) 2007-2008 Allurent, Inc.
  * http://code.google.com/p/antennae/
  *
  * Permission is hereby granted, free of charge, to any person obtaining
@@ -25,13 +25,13 @@
  * The result printer prints output to an XMLSocket, with the expectation that
  * on the other end of the line is a running instance of the Java class 
  *
- *   com.allurent.arc.unittest.server.UnitTestReportServer
+ *   com.allurent.flexunit.framework.UnitTestReportServer
  *
  * The printer prints the results of every test, along with a summary footer.
  * The printer has retry logic that accomodates it being started before a server is running
  * on the other end of the line. The printer tries to connect for 10 seconds and then gives up.
  */
-package com.allurent.flexunit2.framework
+package com.allurent.flexunit.framework
 {
     import flash.events.Event;
     import flash.events.IOErrorEvent;

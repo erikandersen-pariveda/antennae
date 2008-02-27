@@ -9,7 +9,7 @@
     <import file="${root.dir}/tools/build-common-imports.xml" />
 
     <!-- Build path -->
-    <path id="flex2.lib.path"/>
+    <path id="flex.lib.path"/>
 
     <!-- Project specific targets -->
     <target name="build" depends="init,air-application" description="Build the application" />
