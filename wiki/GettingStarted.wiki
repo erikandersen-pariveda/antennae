@@ -1,2 +1,2 @@
 #labels Featured,Phase-Deploy
-A getting started guide for Antennae was written up for [http://www.adobe.com/cfusion/communityengine/index.cfm?event=showdetails&postId=7322&productId=2&loc=en_US The Flex Cookbook].
+A [http://www.adobe.com/cfusion/communityengine/index.cfm?event=showdetails&postId=7322&productId=2&loc=en_US getting started guide] for Antennae was written up for the [http://www.adobe.com/cfusion/communityengine/index.cfm?event=homepage&productId=2 Flex Cookbook].
