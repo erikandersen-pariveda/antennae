@@ -241,17 +241,17 @@ package com.allurent.flexunit.framework
         private function printDefect(number:int, defect:Defect):void
         {
             updateReport(number + ") " + defect.test.toString());
-        	if (defect.error != null)
-        	{
-        	    var message:String = defect.error.getStackTrace();
+            if (defect.error != null)
+            {
+                var message:String = defect.error.getStackTrace();
                 // when running in the non-debug player no stack trace
                 // information is returned, try to get something
-        	    if ((message == null) || (message == ""))
-        	    {
-        	        message = defect.error.toString();
-        	    }
-            	updateReport("\tmessage: " + message);
-        	}
+                if ((message == null) || (message == ""))
+                {
+                    message = defect.error.toString();
+                }
+                updateReport("\tmessage: " + message);
+            }
         }
 
         /**
