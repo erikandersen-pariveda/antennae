@@ -1,7 +1,7 @@
 <!-- Step 2: Use properties to drive settings -->
 <project name="app2" default="build">
     <!-- system properties -->
-    <property name="flex.dir" value="c:/flex/flex2.0.1/sdk" />
+    <property name="flex.dir" value="C:/Apps/Flex/3.0" />
     <property name="flex.frameworks.dir" value="${flex.dir}/frameworks" />
     <property name="flex.dist.lib" value="${flex.dir}/lib" />
     <property name="flex.compc.jar" value="${flex.dist.lib}/compc.jar" />
@@ -15,7 +15,7 @@
             <!-- root of Flex SDK frameworks directory -->
             <arg value="+flexlib=${flex.frameworks.dir}" />
 
-            <!-- find associated sources in the flex2 directory -->
+            <!-- find associated sources in the src directory -->
             <arg value="-source-path=src" />
             <arg value="-file-specs=src/Main.mxml" />
             <arg value="-output=bin/Main.swf" />

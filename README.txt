@@ -1,5 +1,5 @@
 ################################################################
-# Copyright (c) 2007 Allurent, Inc.
+# Copyright (c) 2007-2008 Allurent, Inc.
 # http://code.google.com/p/antennae/
 #
 # Permission is hereby granted, free of charge, to any person obtaining
@@ -23,7 +23,7 @@
 ################################################################
 
 This is the root of the development source tree for Antennae.
-It includes the source for arc-flexunit2, the light-weight way
+It includes the source for arc-flexunit, the light-weight way
 to run FlexUnit tests from the command line, along with the
 source that makes up the end-user Antennae distribution.
 
