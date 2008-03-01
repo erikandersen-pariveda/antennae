@@ -23,19 +23,21 @@
 -->
 <project name="tools.imports">
     <!--
-        Uncomment the next line to trigger the backwards compatible mappings
-        for properties, targets, and tasks most likely to break as a result
-        of the naming changes introduced in Antennae as of 1.2.0.
+        Uncomment the next line to trigger the backwards compatible
+        mappings for properties, targets, and tasks most likely to
+        break as a result of the naming changes introduced in Antennae
+        as of 1.2.0.
         
-        This mechanism should only be enabled if all projects should use
-        compatibility mode, otherwise this file should be imported on a
-        case by case basis. This restriction is due to the change in
-        default values for build.dir, src.flex.dir, and src.java.dir.
+        This mechanism should only be enabled if all projects should
+        use compatibility mode, otherwise this file should be imported
+        on a case by case basis. This restriction is due to the change
+        in default values for build.dir, src.flex.dir, and
+        src.java.dir.
 
         For additional details see the comments in compat-build.xml.
 
-        This mechanism should be considered depreciated and will be removed
-        in a future release of Antennae.
+        This mechanism should be considered depreciated and will be
+        removed in a future release of Antennae.
     -->
     <!--
         <import file="compat-build.xml" />

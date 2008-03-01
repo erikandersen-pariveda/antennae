@@ -138,8 +138,12 @@
         ++ resources.
         ++ =======================================================================
     -->
-    <target name="flex-application" depends="init,flex-application-check,flex-application-copy" unless="${project.swf}.compiled" description="Compile the application">
-        <mxmlc src="${src.flex.dir}/${project.flex.application}" dest="${build.mxmlc.dir}/${project.swf}" />
+    <target name="flex-application"
+            depends="init,flex-application-check,flex-application-copy"
+            unless="${project.swf}.compiled"
+            description="Compile the application">
+        <mxmlc src="${src.flex.dir}/${project.flex.application}"
+               dest="${build.mxmlc.dir}/${project.swf}" />
     </target>
 
     <!--
@@ -150,8 +154,13 @@
         ++ resources.
         ++ =======================================================================
     -->
-    <target name="air-application" depends="init,flex-application-check" unless="${project.swf}.compiled" description="Compile the application">
-        <mxmlc src="${src.flex.dir}/${project.flex.application}" dest="${build.mxmlc.dir}/${project.swf}" config="${air.config}" />
+    <target name="air-application"
+            depends="init,flex-application-check"
+            unless="${project.swf}.compiled"
+            description="Compile the application">
+        <mxmlc src="${src.flex.dir}/${project.flex.application}"
+               dest="${build.mxmlc.dir}/${project.swf}"
+               config="${air.config}" />
     </target>
 
     <!--
@@ -204,7 +213,10 @@
         ++ Build a Flex SWC.
         ++ =======================================================================
     -->
-    <target name="flex-library" depends="init,flex-library-check" unless="${project.swc}.compiled" description="compile flex code into a SWC">
+    <target name="flex-library"
+            depends="init,flex-library-check"
+            unless="${project.swc}.compiled"
+            description="compile flex code into a SWC">
         <compc src.dir="${src.flex.dir}" dest="${build.compc.dir}/${project.swc}" />
     </target>
 
@@ -215,8 +227,13 @@
         ++ Build a Flex SWC that includes AIR dependencies.
         ++ =======================================================================
     -->
-    <target name="air-library" depends="init,flex-library-check" unless="${project.swc}.compiled" description="compile AIR code into a SWC">
-        <compc src.dir="${src.flex.dir}" dest="${build.compc.dir}/${project.swc}" config="${air.config}" />
+    <target name="air-library"
+            depends="init,flex-library-check"
+            unless="${project.swc}.compiled"
+            description="compile AIR code into a SWC">
+        <compc src.dir="${src.flex.dir}"
+               dest="${build.compc.dir}/${project.swc}"
+               config="${air.config}" />
     </target>
 
     <!-- up to date check for flex-classes -->
@@ -262,7 +279,9 @@
         ++ Compile and package an AIR application.
         ++ =======================================================================
     -->
-    <target name="air-package" unless="${project.air}.compiled" depends="air-application-stage,air-package-check,air-certificate-password-prompt">
+    <target name="air-package"
+            unless="${project.air}.compiled"
+            depends="air-application-stage,air-package-check,air-certificate-password-prompt">
         <adt />
     </target>
 
@@ -283,7 +302,8 @@
     </target>
 
     <target name="air-certificate-password-prompt" if="air.certificate.password.prompt">
-        <input message="Please enter password for AIR certificate:" addproperty="air.certificate.password" />
+        <input message="Please enter password for AIR certificate:"
+               addproperty="air.certificate.password" />
     </target>
 
     <!--
@@ -303,7 +323,10 @@
         ++ Create ASDoc files for the project
         ++ =======================================================================
     -->
-    <target name="asdoc" depends="init,asdoc-check" unless="asdoc.uptodate" description="create AS docs">
+    <target name="asdoc"
+            depends="init,asdoc-check"
+            unless="asdoc.uptodate"
+            description="create AS docs">
         <asdoc src.dir="${src.flex.dir}" as.path="${src.flex.dir}" dest.dir="${build.asdoc.dir}" />
     </target>
 
@@ -322,8 +345,13 @@
         ++ resources.
         ++ =======================================================================
     -->
-    <target name="flex-test-application" depends="init,create-test-suite,flex-application-check,flex-application-copy" unless="${project.swf}.compiled" description="Compile the application">
-        <mxmlc src="${build.generated.dir}/${project.flex.application}" dest="${build.mxmlc.dir}/${project.swf}" options="-verbose-stacktraces=true ${flex.mxmlc.options}" />
+    <target name="flex-test-application"
+            depends="init,create-test-suite,flex-application-check,flex-application-copy"
+            unless="${project.swf}.compiled"
+            description="Compile the application">
+        <mxmlc src="${build.generated.dir}/${project.flex.application}"
+               dest="${build.mxmlc.dir}/${project.swf}"
+               options="-verbose-stacktraces=true ${flex.mxmlc.options}" />
     </target>
 
     <!--
@@ -332,26 +360,37 @@
         ++ Generate arc-flexunit compatible AllTests AS class from flexunit tests
         ++ =======================================================================
     -->
-    <target name="create-test-suite" depends="init,create-test-suite-check" unless="create-test-suite.uptodate">
+    <target name="create-test-suite"
+            depends="init,create-test-suite-check"
+            unless="create-test-suite.uptodate">
         <echo message="Updating ${build.generated.dir}/${arc-flexunit.class}.as" />
-        <java classname="com.allurent.flexunit.framework.AllTestsFileGenerator" fork="true" failonerror="true" logError="true" output="${build.generated.dir}/${arc-flexunit.class}.as">
+        <java classname="com.allurent.flexunit.framework.AllTestsFileGenerator"
+              fork="true"
+              failonerror="true"
+              logError="true"
+              output="${build.generated.dir}/${arc-flexunit.class}.as">
             <classpath>
                 <pathelement location="${arc-flexunit.jar}" />
             </classpath>
             <arg value="${src.flex.dir}" />
             <arg value="${arc-flexunit.filters}" />
         </java>
-        <copy file="${arc-flexunit.mxml}" tofile="${build.generated.dir}/${project.flex.application}">
+        <copy file="${arc-flexunit.mxml}"
+              tofile="${build.generated.dir}/${project.flex.application}">
             <filterset>
-                <filter token="arc-flexunit.alltests.suite" value="${arc-flexunit.alltests.suite}" />
-                <filter token="arc-flexunit.reportserver.host" value="${arc-flexunit.reportserver.host}" />
-                <filter token="arc-flexunit.reportserver.port" value="${arc-flexunit.reportserver.port}" />
+                <filter token="arc-flexunit.alltests.suite"
+                        value="${arc-flexunit.alltests.suite}" />
+                <filter token="arc-flexunit.reportserver.host"
+                        value="${arc-flexunit.reportserver.host}" />
+                <filter token="arc-flexunit.reportserver.port"
+                        value="${arc-flexunit.reportserver.port}" />
             </filterset>
         </copy>
     </target>
 
     <target name="create-test-suite-check">
-        <uptodate property="create-test-suite.uptodate" targetfile="${build.generated.dir}/${arc-flexunit.class}.as">
+        <uptodate property="create-test-suite.uptodate"
+                  targetfile="${build.generated.dir}/${arc-flexunit.class}.as">
             <srcfiles dir="${src.flex.dir}" />
             <srcfiles file="${arc-flexunit.filters}" />
         </uptodate>
@@ -364,7 +403,8 @@
         ++ Run FlexUnit tests
         ++ =======================================================================
     -->
-    <target name="test-flexunit" depends="init,test-flexunit-os,test-flexunit-mac,test-flexunit-notmac">
+    <target name="test-flexunit"
+            depends="init,test-flexunit-os,test-flexunit-mac,test-flexunit-notmac">
         <echo message="${server.output}" />
 
         <condition property="flexunit.failed">
@@ -387,7 +427,11 @@
     <target name="test-flexunit-mac" if="test.flexunit.mac">
         <parallel>
             <!-- Start the ReportServer and listen for results from the standalone player.    -->
-            <java classname="com.allurent.flexunit.framework.UnitTestReportServer" outputproperty="server.output" fork="true" resultproperty="reportserver.return.code" timeout="${arc-flexunit.timeout}">
+            <java classname="com.allurent.flexunit.framework.UnitTestReportServer"
+                  outputproperty="server.output"
+                  fork="true"
+                  resultproperty="reportserver.return.code"
+                  timeout="${arc-flexunit.timeout}">
                 <classpath>
                     <pathelement location="${arc-flexunit.jar}" />
                 </classpath>
@@ -403,7 +447,12 @@
                     In order to use the Standalone player from the command line on a Mac
                     it needs to be launched using the open command.
                 -->
-                <exec executable="${mac.open}" dir="${basedir}/${build.mxmlc.dir}" failonerror="false" resultproperty="flashplayer.return.code" timeout="${arc-flexunit.timeout}" vmlauncher="true">
+                <exec executable="${mac.open}"
+                      dir="${basedir}/${build.mxmlc.dir}"
+                      failonerror="false"
+                      resultproperty="flashplayer.return.code"
+                      timeout="${arc-flexunit.timeout}"
+                      vmlauncher="true">
                     <arg value="-a" />
                     <arg value="${flex.standalone.player}" />
                     <arg value="${project.swf}" />
@@ -416,7 +465,11 @@
     <target name="test-flexunit-notmac" unless="test.flexunit.mac">
         <parallel>
             <!-- Start the ReportServer and listen for results from the standalone player.    -->
-            <java classname="com.allurent.flexunit.framework.UnitTestReportServer" outputproperty="server.output" fork="true" resultproperty="reportserver.return.code" timeout="${arc-flexunit.timeout}">
+            <java classname="com.allurent.flexunit.framework.UnitTestReportServer"
+                  outputproperty="server.output"
+                  fork="true"
+                  resultproperty="reportserver.return.code"
+                  timeout="${arc-flexunit.timeout}">
                 <classpath>
                     <pathelement location="${arc-flexunit.jar}" />
                 </classpath>
@@ -428,7 +481,12 @@
             <sequential>
                 <!-- Need to wait a couple of seconds to avoid a race condition in Ant -->
                 <sleep seconds="2" />
-                <exec executable="${flex.standalone.player}" dir="${basedir}/${build.mxmlc.dir}" failonerror="false" resultproperty="flashplayer.return.code" timeout="${arc-flexunit.timeout}" vmlauncher="true">
+                <exec executable="${flex.standalone.player}"
+                      dir="${basedir}/${build.mxmlc.dir}"
+                      failonerror="false"
+                      resultproperty="flashplayer.return.code"
+                      timeout="${arc-flexunit.timeout}"
+                      vmlauncher="true">
                     <arg value="${project.swf}" />
                     <env key="DISPLAY" value="${environment.display}" />
                 </exec>

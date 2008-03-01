@@ -35,8 +35,8 @@
 
         Either of these approaches will allow updating the Antennae templates without
         requiring the merge of localized changes into the distributed files.
-    --> 
-    
+    -->
+
     <!-- derived project properties -->
     <property name="project.name" value="${ant.project.name}" />
     <property name="project.swf" value="${project.name}.swf" />
@@ -70,22 +70,20 @@
     <!-- flex.dir -->
     <!-- flex.standalone.player -->
 
-    <!-- air properties -->        
+    <!-- air properties -->
     <property name="air.config" value="${flex.frameworks.dir}/air-config.xml" />
     <property name="air.adt.jar" value="${flex.dist.lib}/adt.jar" />
-    <condition property="air.adl"
-               value="${flex.dir}/bin/adl.exe"
-               else="${flex.dir}/bin/adl">
+    <condition property="air.adl" value="${flex.dir}/bin/adl.exe" else="${flex.dir}/bin/adl">
         <os family="windows" />
     </condition>
     <property name="src.assets.dir" value="assets" />
     <property name="build.assets.dir" value="${build.stage.dir}/assets" />
-    <property name="air.certificate.type" value="pkcs12"/>
+    <property name="air.certificate.type" value="pkcs12" />
 
     <!-- defined in build-user.properties -->
     <!-- air.certificate -->
     <!-- air.certificate.password -->
-    
+
     <!-- asdoc properties -->
     <property name="asdoc.template.dir" value="${flex.dir}/asdoc/templates" />
     <property name="asdoc.jar" value="${flex.dir}/lib/asdoc.jar" />
@@ -105,7 +103,7 @@
     <property name="javac.debug" value="true" />
     <property name="src.java.dir" value="src" />
     <property name="build.javac.dir" value="${build.dir}/classes" />
-    
+
     <!-- misc properties -->
     <property name="mac.open" value="/usr/bin/open" />
 </project>
