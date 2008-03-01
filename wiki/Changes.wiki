@@ -1,0 +1,8 @@
+#labels Featured,Phase-Design
+= Change Log =
+
+Below are links to detailed changes in each release of Antennae:
+
+* [Antennae1dot2dot0 Antennae 1.2.0]
+
+* [Antennae1dot0001 Antennae 1.0001]
