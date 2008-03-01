@@ -1,5 +1,5 @@
 ################################################################
-# Copyright (c) 2007 Allurent, Inc.
+# Copyright (c) 2007-2008 Allurent, Inc.
 # http://code.google.com/p/antennae/
 #
 # Permission is hereby granted, free of charge, to any person obtaining

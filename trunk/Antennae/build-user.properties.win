@@ -21,11 +21,6 @@ tomcat.webapps.dir=C:/Apps/apache-tomcat-6.0.14/webapps
 flex.standalone.player=${flex.dir}/runtimes/player/win/FlashPlayer.exe
 
 #
-# location of the AIR adl executable
-#
-air.adl=${flex.dir}/bin/adl.exe
-
-#
 # location of the AIR certificate file
 # See the following URL for information on "Creating a self-signed certificate with ADT"
 # http://livedocs.adobe.com/labs/air/1/devappshtml/CommandLineTools_4.html#1034775

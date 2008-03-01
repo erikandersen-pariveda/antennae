@@ -7,10 +7,7 @@
     <dirname property="Antennae.imports.dir" file="${ant.file.Antennae.imports}"/>
 
     <property file="${Antennae.imports.dir}/build-user.properties" />
-    <import file="tools/build-common-properties.xml" />
-
-    <import file="tools/build-common-tasks.xml" />
-    <import file="tools/build-common-targets.xml" />
+    <import file="tools/build-common-imports.xml" />
 
     <import file="build-assets.xml" />
 </project>

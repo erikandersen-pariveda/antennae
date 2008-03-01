@@ -18,12 +18,7 @@ tomcat.webapps.dir=/Applications/Tomcat-6.0.14/webapps
 #
 # location of stand alone debug player
 #
-flex.standalone.player=/Applications/Flex/2.0.1 HF1/player/debug/SAFlashPlayer.app/Contents/MacOS/standalone
-
-#
-# location of the AIR adl executable
-#
-air.adl=${flex.dir}/bin/adl
+flex.standalone.player=${flex.dir}/runtimes/player/mac/Flash Player.app/Contents/MacOS/Flash Player
 
 #
 # location of the AIR certificate file
