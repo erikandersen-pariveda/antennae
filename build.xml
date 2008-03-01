@@ -51,6 +51,7 @@
         <zip destfile="${build.dist.dir}/Antennae-${major}.${minor}.${patch}.zip">
             <zipfileset dir="${antennae.dir}" prefix="Antennae">
                 <exclude name="**/build/"/>
+                <exclude name="**/bin/"/>
                 <exclude name="**/build-user.properties"/>
             </zipfileset>
             <zipfileset dir="arc-flexunit" prefix="Antennae/src/arc-flexunit">

@@ -172,7 +172,7 @@
         ++ Create documentation
         ++ =======================================================================
     -->
-    <macrodef name="asdoc" description="">
+    <macrodef name="asdoc" description="Generate ASDoc based documentation">
         <attribute name="src.dir" />
         <attribute name="as.path" />
         <attribute name="dest.dir" />

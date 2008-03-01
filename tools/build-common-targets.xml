@@ -299,15 +299,15 @@
 
     <!--
         ++ =======================================================================
-        ++ Target: doc
+        ++ Target: asdoc
         ++ Create ASDoc files for the project
         ++ =======================================================================
     -->
     <target name="asdoc" depends="init,asdoc-check" unless="asdoc.uptodate" description="create AS docs">
-        <as3doc src.dir="${src.flex.dir}" as.path="${src.flex.dir}" dest.dir="${build.asdoc.dir}" />
+        <asdoc src.dir="${src.flex.dir}" as.path="${src.flex.dir}" dest.dir="${build.asdoc.dir}" />
     </target>
 
-    <!-- up to date check for as3doc -->
+    <!-- up to date check for asdoc -->
     <target name="asdoc-check">
         <uptodate property="asdoc.uptodate" targetfile="${build.asdoc.dir}/index.html">
             <srcfiles dir="${src.flex.dir}" includes="**/*" />

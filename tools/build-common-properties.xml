@@ -68,7 +68,7 @@
     <property name="build.mxmlc.dir" value="${build.dir}/swf/" />
     <!-- defined in build-user.properties -->
     <!-- flex.dir -->
-	<!-- flex.standalone.player -->
+    <!-- flex.standalone.player -->
 
     <!-- air properties -->        
     <property name="air.config" value="${flex.frameworks.dir}/air-config.xml" />
