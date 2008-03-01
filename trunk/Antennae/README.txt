@@ -147,7 +147,7 @@ project properties
 	messages from Ant and in most cases the path would needs to be
 	overridden anyway. Examples of this behavior are:
 
-	<path id="flex2.lib.path" />
+	<path id="flex.lib.path" />
 	      Must be defined for any flex related target
 	<path id="javac.lib.path" />
 	      Must be defined for any java related target
@@ -155,7 +155,7 @@ project properties
 	If such a path hasn't been defined a build failure such as
 	this will occur:
 
-	Reference flex2.lib.path not found.
+	Reference flex.lib.path not found.
 	
 	It is okay to define an empty path like the two shown above.
 	

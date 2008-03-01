@@ -9,7 +9,7 @@
     <property name="project.flex.application" value="${project.name}.mxml" />
 
     <!-- system properties -->
-    <property name="flex.dir" value="c:/flex/flex2.0.1/sdk" />
+    <property name="flex.dir" value="C:/Apps/Flex/3.0/" />
     <property name="flex.frameworks.dir" value="${flex.dir}/frameworks" />
     <property name="flex.dist.lib" value="${flex.dir}/lib" />
     <property name="flex.compc.jar" value="${flex.dist.lib}/compc.jar" />
