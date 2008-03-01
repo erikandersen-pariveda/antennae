@@ -36,34 +36,34 @@
     -->
 
     <target name="init" description="Call init on each sub project">
-        <echoAndRun target="init"/>
+        <echoAndRun target="init" />
     </target>
 
     <target name="build" description="Call build on each sub project">
-        <echoAndRun target="build"/>
+        <echoAndRun target="build" />
     </target>
 
     <target name="test" description="Call test on each sub project">
-        <echoAndRun target="test"/>
+        <echoAndRun target="test" />
     </target>
 
     <target name="stage" description="Call stage on each sub project">
-        <echoAndRun target="stage"/>
+        <echoAndRun target="stage" />
     </target>
 
     <target name="dist" description="Call dist on each sub project">
-        <echoAndRun target="dist"/>
+        <echoAndRun target="dist" />
     </target>
 
     <target name="deploy" description="Call deploy on each sub project">
-        <echoAndRun target="deploy"/>
+        <echoAndRun target="deploy" />
     </target>
 
     <target name="clean" description="Call clean on each sub project">
-        <echoAndRun target="clean"/>
+        <echoAndRun target="clean" />
     </target>
 
     <target name="undeploy" description="Call undeploy on each sub project">
-        <echoAndRun target="undeploy"/>
+        <echoAndRun target="undeploy" />
     </target>
 </project>
