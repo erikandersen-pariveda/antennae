@@ -30,37 +30,37 @@ does assume the user has access to Ant reference materials.
 Contents:
 
 build-user.properties
-	Properties file that should be adjusted to a particular developer's
-	environment.
-	
+    Properties file that should be adjusted to a particular developer's
+    environment.
+    
 build.xml
-	Master build file for building the app2/ and multi/ projects.
+    Master build file for building the app2/ and multi/ projects.
 
 app1/
-	Example project to get a feel for what an Ant build file looks like
-	and how dependicies work.
+    Example project to get a feel for what an Ant build file looks like
+    and how dependicies work.
 
 app2/
-	Simple Flex application project with a range of progressively more
-	complex and more cleanly structured build approaches in numbered
-	files buildN.xml. See comments in individual files.
+    Simple Flex application project with a range of progressively more
+    complex and more cleanly structured build approaches in numbered
+    files buildN.xml. See comments in individual files.
 
 multi/
-	Complex Flex project including two library projects and an
-	application, with dependencies and a master build file.
+    Complex Flex project including two library projects and an
+    application, with dependencies and a master build file.
 
     build.xml
-		master build file for 'multi' project: builds library1/, library2/
-		and app/.
+        master build file for 'multi' project: builds library1/, library2/
+        and app/.
 
-	library1/
-	library2/
-		two library projects, one dependent on the other
+    library1/
+    library2/
+        two library projects, one dependent on the other
 
-	app/
-		an application project dependent on both libraries
-		including application server staging and deployment targets
+    app/
+        an application project dependent on both libraries
+        including application server staging and deployment targets
 
-	.project
-	    Flex Builder Eclipse plugin project definition
+    .project
+        Flex Builder Eclipse plugin project definition
 

@@ -30,16 +30,16 @@ does assume the user has access to Ant reference materials.
 Contents:
 
 build.xml
-	master build file for 'multi' project: builds library1/, library2/
-	and app/.
+    master build file for 'multi' project: builds library1/, library2/
+    and app/.
 
 library1/
 library2/
-	two library projects, one dependent on the other
+    two library projects, one dependent on the other
 
 app/
-	an application project dependent on both libraries
-	including application server staging and deployment targets
+    an application project dependent on both libraries
+    including application server staging and deployment targets
 
 app/.project
     Flex Builder Eclipse plugin project definition

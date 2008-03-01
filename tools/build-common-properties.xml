@@ -81,7 +81,7 @@
     <property name="src.assets.dir" value="assets" />
     <property name="build.assets.dir" value="${build.stage.dir}/assets" />
     <property name="air.certificate.type" value="pkcs12"/>
-	
+
     <!-- defined in build-user.properties -->
     <!-- air.certificate -->
     <!-- air.certificate.password -->

@@ -34,11 +34,11 @@ SampleApplication is for creating a Flex Application (.swf).
 SampleLibrary is for creating a Flex Library (.swc).
 
 SampleProject is for creating a project that includes both a Flex
-	Library and a Flex Application, to demonstrate inter project
-	dependencies.
+    Library and a Flex Application, to demonstrate inter project
+    dependencies.
 
 SampleTestApplication is for creating a FlexUnit Application. This
-	includes automatic TestSuite generation and command line
-	execution.
+    includes automatic TestSuite generation and command line
+    execution.
 
 SampleAIRApplication is for creating a Flex based AIR Application (.air)
