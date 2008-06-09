@@ -45,7 +45,7 @@
             </fail>
 
             <pathconvert property="_mxmlc.lib.files" refid="@{lib.path.id}" pathsep="," />
-            <condition property="_mxmlc.libpath" value="-library-path+=${_mxmlc.lib.files}" else="">
+            <condition property="_mxmlc.libpath" value='-library-path+="${_mxmlc.lib.files}"' else="">
                 <not>
                     <equals arg1="" arg2="${_mxmlc.lib.files}" trim="true" />
                 </not>
@@ -86,7 +86,7 @@
             </fail>
 
             <pathconvert property="_compc.lib.files" refid="@{lib.path.id}" pathsep="," />
-            <condition property="_compc.libpath" value="-library-path+=${_compc.lib.files}" else="">
+            <condition property="_compc.libpath" value='-library-path+="${_compc.lib.files}"' else="">
                 <not>
                     <equals arg1="" arg2="${_compc.lib.files}" trim="true" />
                 </not>
@@ -203,7 +203,7 @@
             </fail>
 
             <pathconvert property="asdoc.lib.files" refid="@{lib.path.id}" pathsep="," />
-            <condition property="asdoc.libpath" value="-library-path+=${asdoc.lib.files}" else="">
+            <condition property="asdoc.libpath" value='-library-path+="${asdoc.lib.files}"' else="">
                 <not>
                     <equals arg1="" arg2="${asdoc.lib.files}" trim="true" />
                 </not>
