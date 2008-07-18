@@ -23,6 +23,41 @@
 ################################################################
 
 ++++++++++++++++++++++++++++++++++++++++
++ Changes in 1.2.1
+++++++++++++++++++++++++++++++++++++++++
+
+Bug fixes
+    The following issues logged against Antennae have been fixed:
+    7: Test AIR Apps
+    8: Building Antennae error
+
+Behavior changes
+    The flex.dir property is no longer defaulted in
+    build-common-properties.xml. This property is designed to be set
+    in build-user.properties.
+
+    A property named air.certificate.type has been added with a
+    default value of pkcs12. This property is used by AIR when
+    creating a signed .air file.
+
+    <property name="arc-air-flexunit.mxml" location="${lib.assets.dir}/RunAirTests.mxml" />
+    <property name="arc-air-flexunit-app.xml" location="${lib.assets.dir}/RunAirTests-app.xml" />
+
+***** New Files
+
+lib/RunAirTests-app.xml
+lib/RunAirTests.mxml
+    Application shell and descriptor used to create an AIR application that can run FlexUnit tests.
+
+templates/SampleAIRTestApplication/*
+    Template project for running FlexUnit tests that require access to AIR libraries.
+
+***** Updated Files
+
+build-user.properties.mac
+    Updated to new property naming convention.
+
+++++++++++++++++++++++++++++++++++++++++
 + Changes in 1.2.0
 ++++++++++++++++++++++++++++++++++++++++
 
