@@ -39,10 +39,11 @@ package com.allurent.flexunit.framework
          * @param test test to run
          * @param host host on which report server is running
          * @param port port on which report server is listening
+         * @param callback Optional function to call on completion of all tests.
          */
-        public static function run(test:Test, host:String = "127.0.0.1", port:int = 50031):void
+        public static function run(test:Test, host:String = "127.0.0.1", port:int = 50031, callback:Function = null):void
         {
-            var printer:ARCResultPrinter = new ARCResultPrinter(host, port);
+            var printer:ARCResultPrinter = new ARCResultPrinter(host, port, callback);
             TestRunner.run(test, printer);
         }    
     }

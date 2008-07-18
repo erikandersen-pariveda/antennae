@@ -99,16 +99,23 @@ package com.allurent.flexunit.framework
          * Report string that contains all of the test output.
          */
         private var _report:String = "";
+        
+        /**
+         * Function to call after all tests have run.
+         */
+        private var _callbackOnAllTestsEnd:Function;
     
         /**
          * Create a new result printer.
          * @param host Host to connect to
          * @param port Port on host to connect to
+         * @param callbackOnAllTestsEnd Optional function to call when all tests have finished running
          */
-        public function ARCResultPrinter(host:String, port:int) 
+        public function ARCResultPrinter(host:String, port:int, callbackOnAllTestsEnd:Function) 
         {
             _host = host;
             _port = port;
+            _callbackOnAllTestsEnd = callbackOnAllTestsEnd;
         }
     
         //---------------------------------------------------------------------
@@ -147,6 +154,10 @@ package com.allurent.flexunit.framework
             var runTime:int = endTime - _testsStartTime;
             prepareReport(runTime);
             sendReport();
+            if (_callbackOnAllTestsEnd != null)
+            {
+                _callbackOnAllTestsEnd();
+            }
         }
     
         /**

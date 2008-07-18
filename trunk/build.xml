@@ -29,6 +29,8 @@
         <copy file="${arc-flexunit.swc}" todir="${antennae.lib.dir}"/>
         <copy file="${arc-flexunit.jar}" todir="${antennae.lib.dir}"/>
         <copy file="${arc-flexunit.mxml}" todir="${antennae.lib.dir}"/>
+        <copy file="${arc-air-flexunit.mxml}" todir="${antennae.lib.dir}"/>
+        <copy file="${arc-air-flexunit-app.xml}" todir="${antennae.lib.dir}"/>
         <copy todir="${antennae.lib.dir}">
             <fileset dir="lib">
                 <exclude name="build-assets.xml"/>
