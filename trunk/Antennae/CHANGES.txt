@@ -31,31 +31,71 @@ Bug fixes
     7: Test AIR Apps
     8: Building Antennae error
 
-Behavior changes
-    The flex.dir property is no longer defaulted in
-    build-common-properties.xml. This property is designed to be set
-    in build-user.properties.
-
-    A property named air.certificate.type has been added with a
-    default value of pkcs12. This property is used by AIR when
-    creating a signed .air file.
-
-    <property name="arc-air-flexunit.mxml" location="${lib.assets.dir}/RunAirTests.mxml" />
-    <property name="arc-air-flexunit-app.xml" location="${lib.assets.dir}/RunAirTests-app.xml" />
-
 ***** New Files
 
-lib/RunAirTests-app.xml
-lib/RunAirTests.mxml
-    Application shell and descriptor used to create an AIR application that can run FlexUnit tests.
+lib/RunAirTests*
+    Application shell and descriptor used to create an AIR based
+    FlexUnit application.
 
 templates/SampleAIRTestApplication/*
-    Template project for running FlexUnit tests that require access to AIR libraries.
+    Template project for running AIR based FlexUnit tests.
 
 ***** Updated Files
 
-build-user.properties.mac
-    Updated to new property naming convention.
+lib/arc-flexunit.swc
+src/arc-flexunit/*
+    Facility added to call a function at the conclusion of all unit
+    tests. Added to support exiting from an AIR based FlexUnit
+    application.
+
+lib/build-assets.xml
+    Includes references to template files for creating AIR based
+    FlexUnit applications.
+
+tools/build-common-targets.xml
+    Added new targets to support AIR based FlexUnit applications.
+
+tools/build-common-tasks.xml
+    Updated to allow library paths to include spaces.
+
+***** New Targets (tools/build-common-targets.xml)
+
+air-test-application-stage
+    Stages an AIR based FlexUnit application for running. This is the
+    test version of the air-application-stage target.
+
+air-test-application
+    Compiles an AIR based FlexUnit application. This automatically
+    creates the TestSuite that the application will use. This is the
+    AIR version of the flex-test-application target.
+    
+flex-test-app
+    Creates the application MXML for a Flex based FlexUnit
+    application. Tasks in this target were removed from
+    create-test-suite in order to support AIR based FlexUnit
+    applications. Called by the existing flex-test-application target.
+    
+air-test-app
+    Creates the application MXML and application descriptor for an AIR
+    based FlexUnit application.  Called by the new
+    air-test-application target.
+    
+test-air-flexunit
+    Runs an AIR based FlexUnit application, assumes application has
+    already been built.
+
+***** New Properties (tools/build-common-properties.xml)
+
+arc-air-flexunit.mxml
+    Template file used to create an AIR based FlexUnit application.
+
+    Default: ${lib.assets.dir}/RunAirTests.mxml
+    
+arc-air-flexunit-app.xml
+    Template file used to create the AIR descriptor for a FlexUnit
+    application.
+
+    Default: ${lib.assets.dir}/RunAirTests-app.xml
 
 ++++++++++++++++++++++++++++++++++++++++
 + Changes in 1.2.0

@@ -249,7 +249,7 @@
 
     <!--
         ++ =======================================================================
-        ++ Target: test air-application-stage
+        ++ Target: air-test-application-stage
         ++
         ++ Stage a Test AIR application's assets for use by ADL or ADT, excluding all templates.
         ++ =======================================================================

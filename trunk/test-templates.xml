@@ -5,19 +5,19 @@
         build-common-targets which is pulled in through
         the build-imports.xml process.
     -->
-    <import file="../tools/build-master-targets.xml" />
-    <import file="../build-imports.xml" />
+    <import file="Antennae/tools/build-master-targets.xml" />
+    <import file="Antennae/build-imports.xml" />
 
     <!--
         A filelist defines an ordered list that is used to
         encode the project build order that should be used
     -->
-    <filelist id="children.filelist" dir=".">
-<file name="SampleAIRApplication"/>
-<file name="SampleAIRTestApplication"/>
-<file name="SampleApplication"/>
-<file name="SampleLibrary"/>
-<file name="SampleProject"/>
-<file name="SampleTestApplication"/>
+    <filelist id="children.filelist" dir="Antennae/templates/">
+        <file name="SampleAIRApplication" />
+        <file name="SampleAIRTestApplication" />
+        <file name="SampleApplication" />
+        <file name="SampleLibrary" />
+        <file name="SampleProject" />
+        <file name="SampleTestApplication" />
     </filelist>
 </project>
