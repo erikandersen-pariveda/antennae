@@ -84,7 +84,7 @@ test-air-flexunit
     Runs an AIR based FlexUnit application, assumes application has
     already been built.
 
-***** New Properties (tools/build-common-properties.xml)
+***** New Properties (lib/build-assets.xml)
 
 arc-air-flexunit.mxml
     Template file used to create an AIR based FlexUnit application.

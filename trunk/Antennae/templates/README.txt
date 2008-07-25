@@ -1,5 +1,5 @@
 ################################################################
-# Copyright (c) 2007 Allurent, Inc.
+# Copyright (c) 2007-2008 Allurent, Inc.
 # http://code.google.com/p/antennae/
 #
 # Permission is hereby granted, free of charge, to any person obtaining
@@ -42,3 +42,7 @@ SampleTestApplication is for creating a FlexUnit Application. This
     execution.
 
 SampleAIRApplication is for creating a Flex based AIR Application (.air)
+
+SampleAIRTestApplication is for creating an AIR based FlexUnit
+    Application. This includes automatic TestSuite generation and
+    command line execution.
