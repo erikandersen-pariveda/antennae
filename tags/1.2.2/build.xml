@@ -1,0 +1,84 @@
+<project name="antennae" default="dist" basedir=".">
+    <!-- Import a special target set for master build files -->
+    <import file="tools/build-master-targets.xml" />
+    <import file="build-imports.xml" />
+
+    <property name="antennae.dir" location="Antennae"/>
+    <property name="antennae.lib.dir" location="${antennae.dir}/lib"/>
+    <property name="antennae.tools.dir" location="${antennae.dir}/tools"/>
+    
+    <filelist id="children.filelist" dir=".">
+        <file name="arc-flexunit"/>
+    </filelist>
+    
+    <target name="init">
+        <echoAndRun target="init"/>
+        <antcall target="init.internal"/>
+    </target>
+
+    <target name="init.internal" depends="tools.targets.init">
+        <mkdir dir="${antennae.tools.dir}"/>
+    </target>
+        
+    <target name="stage">
+        <echoAndRun target="stage"/>
+        <antcall target="stage.internal"/>
+    </target>
+
+    <target name="stage.internal" depends="init.internal">
+        <copy file="${arc-flexunit.swc}" todir="${antennae.lib.dir}"/>
+        <copy file="${arc-flexunit.jar}" todir="${antennae.lib.dir}"/>
+        <copy file="${arc-flexunit.mxml}" todir="${antennae.lib.dir}"/>
+        <copy file="${arc-air-flexunit.mxml}" todir="${antennae.lib.dir}"/>
+        <copy file="${arc-air-flexunit-app.xml}" todir="${antennae.lib.dir}"/>
+        <copy todir="${antennae.lib.dir}">
+            <fileset dir="lib">
+                <exclude name="build-assets.xml"/>
+            </fileset>
+        </copy>
+        <copy todir="${antennae.tools.dir}">
+            <fileset dir="tools"/>
+        </copy>
+        <copy file="build-user.properties" todir="${antennae.dir}"/>
+    </target>
+    
+    <!-- Create the distribution -->
+    <target name="dist">
+        <echoAndRun target="dist"/>
+        <antcall target="dist.internal"/>
+    </target>
+
+    <target name="dist.internal" depends="stage.internal">
+        <property file="version.properties" />
+        <zip destfile="${build.dist.dir}/Antennae-${major}.${minor}.${patch}.zip">
+            <zipfileset dir="${antennae.dir}" prefix="Antennae">
+                <exclude name="**/build/"/>
+                <exclude name="**/bin/"/>
+                <exclude name="**/build-user.properties"/>
+            </zipfileset>
+            <zipfileset dir="arc-flexunit" prefix="Antennae/src/arc-flexunit">
+                <include name="**/flex/"/>
+                <include name="**/java/"/>
+            </zipfileset>
+        </zip>
+    </target>
+
+    <target name="clean">
+        <echoAndRun target="clean"/>
+        <antcall target="clean.internal"/>
+    </target>
+    
+    <target name="clean.internal" depends="tools.targets.clean">
+        <delete dir="${antennae.tools.dir}"/>
+        <delete>
+            <fileset dir="${antennae.lib.dir}">
+                <exclude name="build-assets.xml"/>
+            </fileset>
+        </delete>
+        <delete file="${antennae.dir}/build-user.properties"/>
+    </target>
+
+    <target name="fixeol">
+        <fixcrlf srcdir="." includes="**/*.xml,**/*.txt,**/*.as,**/*.mxml,**/*.mac,**/*.win" eol="dos"/>
+    </target>
+</project>
