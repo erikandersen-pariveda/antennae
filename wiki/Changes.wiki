@@ -3,6 +3,8 @@
 
 Below are links to detailed changes in each release of Antennae:
 
+* [Antennae1dot2dot2 Antennae 1.2.2]
+
 * [Antennae1dot2dot1 Antennae 1.2.1]
 
 * [Antennae1dot2dot0 Antennae 1.2.0]
