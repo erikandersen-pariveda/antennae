@@ -563,7 +563,7 @@
                 <exec executable="${flex.standalone.player}" dir="${basedir}/${build.mxmlc.dir}"
                     failonerror="false" resultproperty="flashplayer.return.code"
                     timeout="${arc-flexunit.timeout}" vmlauncher="true">
-                    <arg value="${project.swf}" />
+                    <arg value="${basedir}/${build.mxmlc.dir}/${project.swf}" />
                     <env key="DISPLAY" value="${environment.display}" />
                 </exec>
             </sequential>

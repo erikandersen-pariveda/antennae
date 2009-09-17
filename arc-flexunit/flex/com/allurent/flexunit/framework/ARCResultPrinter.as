@@ -101,21 +101,21 @@ package com.allurent.flexunit.framework
         private var _report:String = "";
         
         /**
-         * Function to call after all tests have run.
+         * Function to call after all test data has been sent.
          */
-        private var _callbackOnAllTestsEnd:Function;
+        private var _callbackOnComplete:Function;
     
         /**
          * Create a new result printer.
          * @param host Host to connect to
          * @param port Port on host to connect to
-         * @param callbackOnAllTestsEnd Optional function to call when all tests have finished running
+         * @param callbackOnComplete Optional function to call when all test data has been sent; if unspecified a fscommand to quit will be called
          */
-        public function ARCResultPrinter(host:String, port:int, callbackOnAllTestsEnd:Function) 
+        public function ARCResultPrinter(host:String, port:int, callbackOnComplete:Function) 
         {
             _host = host;
             _port = port;
-            _callbackOnAllTestsEnd = callbackOnAllTestsEnd;
+            _callbackOnComplete = callbackOnComplete;
         }
     
         //---------------------------------------------------------------------
@@ -154,10 +154,6 @@ package com.allurent.flexunit.framework
             var runTime:int = endTime - _testsStartTime;
             prepareReport(runTime);
             sendReport();
-            if (_callbackOnAllTestsEnd != null)
-            {
-                _callbackOnAllTestsEnd();
-            }
         }
     
         /**
@@ -354,8 +350,24 @@ package com.allurent.flexunit.framework
             }
     
             _theSocket.close();
-            fscommand("quit", "");
+            if (_callbackOnComplete == null)
+            {
+            	defaultCallbackOnComplete();
+        	}
+        	else
+        	{
+            	_callbackOnComplete();
+        	}
         }
+        
+        /**
+         * Default callback on complete that issues an
+         * fscommand to quit the Flash player.
+         */ 
+        public function defaultCallbackOnComplete():void
+        {
+            fscommand("quit", "");
+    	}
     }
 }
 
