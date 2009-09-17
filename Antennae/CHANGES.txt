@@ -37,8 +37,6 @@ Behavior changes
     AllTestsFileGenerator to control if the AlwaysFail test should be
     included if a filters file is in use. This behavior can be
     controlled through the use of a new property described below.
-    build-common-properties.xml. This property is designed to be set
-    in build-user.properties.
 
 ***** New Files
 
