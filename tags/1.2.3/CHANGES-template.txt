@@ -1,0 +1,46 @@
+++++++++++++++++++++++++++++++++++++++++
++ Changes in #.#.#
+++++++++++++++++++++++++++++++++++++++++
+
+Overview
+    Description
+
+Bug fixes
+    The following issues logged against Antennae have been fixed:
+    #: Title
+
+***** New Files
+
+path/
+    Description
+
+***** Updated Files
+
+path/
+    Description
+
+***** New Targets (tools/build-common-targets.xml)
+
+target
+    Description
+
+***** New Tasks (tools/build-common-tasks.xml)
+
+task
+    Description
+
+***** New Properties (tools/build-common-properties.xml)
+
+property
+    Description
+
+    Default: value
+
+*** New unspecified properties:
+
+property
+    Required by
+
+    Description
+
+    No default, specify in build-user.properties

@@ -1,0 +1,24 @@
+<project name="templates" default="build" basedir=".">
+    <!--
+        Import a special target set for master build files.
+        This overrides the standard targets defined in 
+        build-common-targets which is pulled in through
+        the build-imports.xml process.
+    -->
+    <import file="Antennae/tools/build-master-targets.xml" />
+    <import file="Antennae/build-imports.xml" />
+
+    <!--
+        A filelist defines an ordered list that is used to
+        encode the project build order that should be used
+    -->
+    <filelist id="children.filelist" dir="Antennae/templates/">
+        <file name="SampleAIRApplication" />
+        <file name="SampleAIRTestApplication" />
+        <file name="SampleApplication" />
+        <file name="SampleAS3" />
+        <file name="SampleLibrary" />
+        <file name="SampleProject" />
+        <file name="SampleTestApplication" />
+    </filelist>
+</project>

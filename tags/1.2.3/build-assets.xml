@@ -1,0 +1,4 @@
+<project name="antennae.assets">
+    <import file="lib/build-assets.xml"/>
+    <import file="arc-flexunit/build-assets.xml"/>
+</project>
