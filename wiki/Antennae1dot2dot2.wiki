@@ -1,4 +1,4 @@
-#labels Featured,Phase-Design
+#labels Phase-Design
 =Changes in 1.2.2=
 
 ==Updated Files==
