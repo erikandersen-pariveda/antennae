@@ -44,10 +44,12 @@ public class AllTestsFileGenerator
      *            Directory to start looking for test classes in
      * @param filtersFile
      *            Optional file that filters what tests to run
+     * @param skipAlwaysFail
+     *            Disable the always fail test, even if a filters file is in use.
      * @return Contents of test class
      * @throws IOException
      */
-    private String generateAllTestsClass(File rootDir, File filtersFile) throws IOException
+    private String generateAllTestsClass(File rootDir, File filtersFile, boolean skipAlwaysFail) throws IOException
     {
         List classlist = new LinkedList();
         if (rootDir == null || !rootDir.exists() || !rootDir.isDirectory())
@@ -76,7 +78,7 @@ public class AllTestsFileGenerator
         result.append("\n        public static function suite() : TestSuite");
         result.append("\n        {");
         result.append("\n            var testSuite:TestSuite = new TestSuite();");
-        if (fileFilter.hasFilters())
+        if (!skipAlwaysFail && fileFilter.hasFilters())
         {
             classlist.add("AlwaysFail");
         }
@@ -90,7 +92,7 @@ public class AllTestsFileGenerator
         result.append("\n        }");
         result.append("\n    }");
         result.append("\n}");
-        if (fileFilter.hasFilters())
+        if (!skipAlwaysFail && fileFilter.hasFilters())
         {
             result.append("\n\nimport flexunit.framework.*;");
             result.append("\n\nclass AlwaysFail extends TestCase");
@@ -168,7 +170,11 @@ public class AllTestsFileGenerator
         System.out
                 .println("\nAllTestsFileGenerator : Generates an arc-flexunit compatible \"AllTests\" ActionScript class based on test classes in a source directory.");
         System.out.println("By default any class named Test*.as or *Test.as will be included.");
-        System.out.println("Usage:\n AllTestsFileGenerator <source_dir> [filters_file]\n");
+        System.out.println("The arguments must be specified in the order they are defined:");
+        System.out.println("Either \"-skipAlwaysFail\" or \"-alwaysFail\" maybe specified to toggle the filter file in use test failure. By default it is enabled.");
+        System.out.println("The \"source_dir\" argument must be supplied.");
+        System.out.println("The \"filters_file\" optional argument specifies a file that includes a regular expression per line of tests to include. This disables the standard Test*.as or *Test.as matching behavior.");
+        System.out.println("Usage:\n AllTestsFileGenerator [-skipAlwaysFail or -alwaysFail] <source_dir> [filters_file]\n");
     }
 
     /**
@@ -188,13 +194,24 @@ public class AllTestsFileGenerator
                 usage();
                 System.exit(1);
             }
-            File dir = new File(args[0]);
-            File filtersFile = null;
-            if (args.length >= 2)
+            boolean skipAlwaysFail = false;
+            int offset = 0;
+            if ("-skipAlwaysFail".equalsIgnoreCase(args[0]))
             {
-                filtersFile = new File(args[1]);
+            	skipAlwaysFail = true;
+            	offset++;
             }
-            System.out.println(generator.generateAllTestsClass(dir, filtersFile));
+            if ("-alwaysFail".equalsIgnoreCase(args[0]))
+            {
+            	offset++;
+            }
+            File dir = new File(args[offset]);
+            File filtersFile = null;
+            if (args.length >= 2 + offset)
+            {
+                filtersFile = new File(args[1 + offset]);
+            }
+            System.out.println(generator.generateAllTestsClass(dir, filtersFile, skipAlwaysFail));
         }
         catch (Throwable t)
         {

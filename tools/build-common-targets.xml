@@ -423,6 +423,7 @@
             <classpath>
                 <pathelement location="${arc-flexunit.jar}" />
             </classpath>
+            <arg value="${arc-flexunit.filters-fail}" />
             <arg value="${src.flex.dir}" />
             <arg value="${arc-flexunit.filters}" />
         </java>
