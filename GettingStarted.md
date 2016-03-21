@@ -1,0 +1,1 @@
+A [getting started guide](http://www.adobe.com/cfusion/communityengine/index.cfm?event=showdetails&postId=7322&productId=2&loc=en_US) for Antennae was written up for the [Flex Cookbook](http://www.adobe.com/cfusion/communityengine/index.cfm?event=homepage&productId=2).
